@@ -7,7 +7,6 @@ use App\Models\UserApp;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 use DB;
-use App\Models\UserApp;
 class UserPreNameController extends Controller
 {
 
@@ -18,8 +17,8 @@ class UserPreNameController extends Controller
   {
 
         $id_user = $request->get('id_user');
-        $prenom = $request->get('prenom');
-        $prenom = str_replace("'","\'",$prenom);
+        $prenom = $request->get('nom');
+        $prenom = str_replace("'","\'",$nom);
         $user_cat = $request->get('user_cat');
         $date_heure = date('Y-m-d H:i:s');
 
@@ -27,8 +26,8 @@ class UserPreNameController extends Controller
 
 
 
-          
-            $updatedata = UserApp::where('id',$id_user)->first();
+            $updatedata =  DB::update('update tj_user_app set prenom = ?,modifier = ? where id = ?',[$prenom,$date_heure,$id_user]);
+
             if ($updatedata > 0) {
                 $get_user = UserApp::where('id',$id_user)->first();
                 $row = $get_user->toArray();
