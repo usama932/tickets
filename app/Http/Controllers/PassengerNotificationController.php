@@ -43,7 +43,7 @@ class PassengerNotificationController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
         $response = curl_exec($ch);
-
+        
         return back()->with('message', 'Notification send successfully.');
     }
 }

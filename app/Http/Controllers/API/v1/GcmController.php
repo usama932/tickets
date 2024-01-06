@@ -31,7 +31,7 @@ class GcmController extends Controller
 
         $headers = array(
 //            'Authorization:key='.Config::get('constant.apikey.GOOGLE_API_KEY'),
-            'Authorization:key=AAAA0u9BeJI:APA91bHFNEgnMMAWSJr5lfxj1S5JF1NOcPvyJzxMIIrnmTJEfoVRBdm8v3QKXTpKBGFKL6ACdU4R88eYmUi0QaSno_QJxa8WiE2Ci5wgMCGy9R5MtqNPblaGmOA9eeX7y56042X2tTBV',
+            'Authorization:key=AAAAOERbWiY:APA91bF1xO1XzAzZRt3-0S_3WTiAVuTdyKr9lDqidZ5ojSMh1-9DRJZl4JJ0C1zQmVIxtAbFCyG5D_D3rQfsn3oT_wvl6WYSQJZ-eehGhL1RX3hvKR_Dk8Ve449Amlg6gT9kIqghOHrB',
             'Content-Type:application/json'
         );
         $ch = curl_init();
