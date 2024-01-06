@@ -7,6 +7,7 @@ use App\Models\UserApp;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 use DB;
+use App\Models\UserApp;
 class UserPreNameController extends Controller
 {
 
@@ -26,8 +27,8 @@ class UserPreNameController extends Controller
 
 
 
-            $updatedata =  DB::update('update tj_user_app set prenom = ?,modifier = ? where id = ?',[$prenom,$date_heure,$id_user]);
-
+          
+            $updatedata = UserApp::where('id',$id_user)->first();
             if ($updatedata > 0) {
                 $get_user = UserApp::where('id',$id_user)->first();
                 $row = $get_user->toArray();
