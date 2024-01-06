@@ -165,7 +165,7 @@
                         <div class="form-group row width-50">
                            <label class="col-3 control-label">{{trans('lang.vehicle_model')}}</label>
                            <div class="col-7">
-                              <input type="text" class="form-control model" name="model" value="{{Request::old('model')}}">
+                              <input type="text" class="form-control model" name="model_name" value="{{Request::old('model')}}">
                               {{-- <select class="form-control model" name="model" id="model">
                               </select> --}}
                               <div class="form-text text-muted">{{trans('lang.car_model_help')}}</div>
