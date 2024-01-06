@@ -33,8 +33,8 @@ class UserNameController extends Controller
 
 
 
-           
-            $updatedata = UserApp::where('id',$id_user)->first();
+            $updatedata =  DB::update('update tj_user_app set nom = ?,modifier = ? where id = ?',[$nom,$date_heure,$id_user]);
+
             if ($updatedata > 0) {
                 $get_user = UserApp::where('id',$id_user)->first();
                 $row = $get_user->toArray();
@@ -80,7 +80,7 @@ class UserNameController extends Controller
 
         }elseif($user_cat == "driver"){
 
-            $updatedata = Driver::where('id',$id_user)->first();
+            $updatedata =  DB::update('update tj_conducteur set nom = ?,modifier = ? where id = ?',[$nom,$date_heure,$id_user]);
 
             if ($updatedata > 0) {
                 $get_user = Driver::where('id',$id_user)->first();
