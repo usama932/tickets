@@ -145,7 +145,7 @@ class UserController extends Controller
         // }
 
         $user->save();
-        return redirect('users');
+        return redirect('users.index');
         //return view("settings.users.index")->with("users", $users);
 
     }
