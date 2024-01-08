@@ -51,10 +51,9 @@
                                                 <div class="col-7">
                                                     <select  class="form-control brand_id" name="libelle">
                                                         <option value="">--! Select Type !--</option>
-                                                        <option value="Passenger">Only Passenger Carry</option>
-                                                        <option value="Passenger & Pet">Passenger & Pet Carry</option>
-                                                        <option value="Passenger & Package">Passenger & Package Carry</option>
-                                                        <option value="Passenger, Pet & Package">Passenger, Pet & Package Carry</option>
+                                                        <option value="Passengers">Passengers</option>
+                                                        <option value="Passengers & Parcel">Passengers & Parcel</option>
+                                                        <option value="Passengers ,Parcel & Pets">Passengers ,Parcel & Pets</option>
                                                     </select>
                                                     <!-- <div class="form-text text-muted"></div> -->
                                                 </div>

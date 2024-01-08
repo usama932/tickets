@@ -52,10 +52,9 @@
                                                 <div class="col-7">
                                                     <select  class="form-control brand_id" name="libelle">
                                                         <option value="">--! Select Type !--</option>
-                                                        <option value="Passenger" @if($type->libelle == "Passenger") selected @endif>Only Passenger Carry</option>
-                                                        <option value="Passenger & Pet"  @if($type->libelle == "Passenger & Pet") selected @endif>Passenger & Pet Carry</option>
-                                                        <option value="Passenger, Pet & Package"  @if($type->libelle == "Passenger, Pet & Package") selected @endif>Passenger, Pet & Package Carry</option>
-
+                                                        <option value="Passengers" @if($type->libelle == "Passengers") selected @endif>Passengers</option>
+                                                        <option value="Passengers & Parcel" @if($type->libelle == "Passengers & Parcel") selected @endif>Passengers & Parcel</option>
+                                                        <option value="Passengers ,Parcel & Pets" @if($type->libelle == "Passengers ,Parcel & Pets") selected @endif>Passengers ,Parcel & Pets</option>
                                                     </select>
 
                                                     <!-- <div class="form-text text-muted"></div> -->
