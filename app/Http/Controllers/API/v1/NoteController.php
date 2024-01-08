@@ -32,6 +32,9 @@ class NoteController extends Controller
         $id_user_app = $request->get('id_user_app');
         $id_conducteur = $request->get('id_conducteur');
         $note_value = $request->get('note_value');
+        $car_condition = $request->get('car_condition');
+        $driver_comfort = $request->get('driver_comfort');
+        $no_jugment = $request->get('no_jugment');
         $comment = $request->get('comment');
         $ride_id = $request->get('ride_id');
         $date_heure = date('Y-m-d H:i:s');
@@ -46,7 +49,7 @@ class NoteController extends Controller
         ->get();
       if ($chknote->count() > 0)  {
 
-                $updatedata = DB::update('update tj_note set niveau = ?,ride_id = ?,modifier = ?,comment = ? where id_conducteur = ? AND id_user_app = ?',[$note_value,$ride_id,$date_heure,$comment,$id_conducteur,$id_user_app]);
+                $updatedata = DB::update('update tj_note set niveau = ?,car_condition = ?,driver_comfort = ?,no_jugment = ?,ride_id = ?,modifier = ?,comment = ? where id_conducteur = ? AND id_user_app = ?',[$note_value,$car_condition,$driver_comfort,$no_jugment,$ride_id,$date_heure,$comment,$id_conducteur,$id_user_app]);
 
                   // Nb avis conducteur
                 $sql_nb_avis = DB::table('tj_note')
@@ -72,9 +75,15 @@ class NoteController extends Controller
             $row['nb_avis'] = $row_nb_avis->nb_avis;
             if(!empty($sql_note)){
                 $row['niveau'] = $row_note->niveau;
+                $row['car_condition'] = $row_note->car_condition ?? '';
+                $row['driver_comfort'] = $row_note->driver_comfort  ?? '';
+                $row['no_jugment'] = $row_note->no_jugment  ?? '';
                 $row['comment'] = $row_note->comment;
             }else{
                 $row['niveau'] = "";
+                $row['car_condition'] = '';
+                $row['driver_comfort'] = '';
+                $row['no_jugment'] = '';
                 $row['comment'] = "";
             }
             $row['moyenne'] = $moyenne;
@@ -86,8 +95,8 @@ class NoteController extends Controller
         }
 
         else {
-            $insertdata = DB::insert("insert into tj_note(niveau,ride_id,id_conducteur,id_user_app,statut,creer,modifier,comment)
-            values('".$note_value."','".$ride_id."','".$id_conducteur."','".$id_user_app."','yes','".$date_heure."','".$date_heure."','".$comment."')");
+            $insertdata = DB::insert("insert into tj_note(niveau,car_condition,driver_comfort,no_jugment,ride_id,id_conducteur,id_user_app,statut,creer,modifier,comment)
+            values('".$note_value."','".$car_condition."','".$driver_comfort."','".$no_jugment."','".$ride_id."','".$id_conducteur."','".$id_user_app."','yes','".$date_heure."','".$date_heure."','".$comment."')");
             $id=DB::getPdo()->lastInsertId();
             if ($insertdata > 0) {
                 $row = [];
@@ -115,9 +124,15 @@ class NoteController extends Controller
 
                 if(!empty($sql_note)){
                     $row['niveau'] = $row_note->niveau;
+                    $row['car_condition'] = $row_note->car_condition ?? '';
+                    $row['driver_comfort'] = $row_note->driver_comfort  ?? '';
+                    $row['no_jugment'] = $row_note->no_jugment  ?? '';
                     $row['comment'] = $row_note->comment;
                 }else{
                     $row['niveau'] = "";
+                    $row['car_condition'] = '';
+                    $row['driver_comfort'] = '';
+                    $row['no_jugment'] = '';
                     $row['comment'] = "";
                 }
                 $row['moyenne'] = $moyenne;
