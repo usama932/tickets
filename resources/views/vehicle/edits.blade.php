@@ -53,11 +53,7 @@
                                                     <select  class="form-control brand_id" name="libelle">
                                                         <option value="">--! Select Type !--</option>
                                                         <option value="Passengers" @if($type->libelle == "Passengers") selected @endif>Passengers</option>
-                                                        <option value="Passengers & Parcel" @if($type->libelle == "Passengers & Parcel") selected @endif>Passengers & Parcel</option>
-                                                        <option value="Passengers ,Parcel & Pets" @if($type->libelle == "Passengers ,Parcel & Pets") selected @endif>Passengers ,Parcel & Pets</option>
-                                                    </select>
-
-                                                    <!-- <div class="form-text text-muted"></div> -->
+                                                        <option value="Passengers & Parcel" @if(
                                                 </div>
                                             </div>
 
