@@ -20,7 +20,6 @@ class RideSettingController extends Controller
             'token_price' => 'required|numeric|not_in:0',
             'ride_token' => 'required|numeric|not_in:0',
             'gift_token' => 'required|numeric|not_in:0',
-
             'pet_more' => 'required|numeric|not_in:0',
         ],  $messages = [
           'token_price.required' => 'The token_price field is required! and Not 0',

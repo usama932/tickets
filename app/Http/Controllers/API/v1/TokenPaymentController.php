@@ -64,9 +64,12 @@ class TokenPaymentController extends Controller
         return response()->json($response);
 
     }
+
+    public function passenger_not_show(Request $request){
+        dd('asss');
+    }
+    
     public function remain_token(Request $request){
-
-
         $rem =RemainingToken::where('user_id',$request->user_id)->first();
 
         if(!empty($rem)){

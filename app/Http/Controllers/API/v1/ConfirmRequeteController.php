@@ -105,15 +105,15 @@ class ConfirmRequeteController extends Controller
         }
         $gift_token =  RideSetting::latest()->first();
         if($gift_token){
-           $rem =  RemainingToken::where('user_id', $from_id)->first();
-           if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $gift_token->ride_token){
-            $rem->tokens = $rem->tokens - $gift_token->ride_token;
-            $rem->save();
-           }
-           else{
-            $response['success'] = 'Failed';
-            $response['error'] = 'Your token is less then ride token';
-           }
+            $rem =  RemainingToken::where('user_id', $from_id)->first();
+            if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $gift_token->ride_token){
+                $rem->tokens = $rem->tokens - $gift_token->ride_token;
+                $rem->save();
+            }
+            else{
+                $response['success'] = 'Failed';
+                $response['error'] = 'Your token is less then ride token';
+            }
         }
         if (count($tokens) > 0) {
             $data = DB::table('tj_requete')

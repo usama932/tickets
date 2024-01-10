@@ -327,7 +327,10 @@ Route::post('v1/resert-password/', [ResertPasswordController::class, 'resertPass
     Route::get('v1/ride_settings', [TokenPaymentController::class, 'settings']);
     Route::post('v1/check_balance', [TokenPaymentController::class, 'check_balance']);
 
-Route::get('v1/wallet-history/', [DriverWalletHistoryController::class, 'getData']);
+    //passenger not show
+    Route::post('v1/not_show', [TokenPaymentController::class, 'passenger_not_show']);
+
+    Route::get('v1/wallet-history/', [DriverWalletHistoryController::class, 'getData']);
 
 
 //not found
