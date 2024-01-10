@@ -32,6 +32,11 @@ class UserNoteController extends Controller
         $id_user_app = $request->get('id_user_app');
         $id_conducteur = $request->get('id_conducteur');
         $note_value = $request->get('note_value');
+        $passenger_behaviour  = $request->get('passenger_behaviour');
+        $follow_roads  = $request->get('follow_roads');
+        $passenger_clean  = $request->get('passenger_clean');
+        $find_passenger  = $request->get('find_passenger');
+        $drop_passenger  = $request->get('drop_passenger');
         $comment = $request->get('comment');
         $ride_id = $request->get('ride_id');
         $date_heure = date('Y-m-d H:i:s');
@@ -47,7 +52,8 @@ class UserNoteController extends Controller
 
       if ($chknote->count() > 0){
 
-                $updatedata = DB::update('update tj_user_note set niveau_driver = ?,ride_id = ?,modifier = ?,comment = ? where id_conducteur = ? AND id_user_app = ?',[$note_value,$ride_id,$date_heure,$comment,$id_conducteur,$id_user_app]);
+                $updatedata = DB::update('update tj_user_note set niveau_driver = ?,passenger_behaviour = ?,
+                follow_roads = ?,passenger_clean = ?,find_passenger = ?,drop_passenger = ?,ride_id = ?,modifier = ?,comment = ? where id_conducteur = ? AND id_user_app = ?',[$note_value,$ride_id,$date_heure,$comment,$id_conducteur,$id_user_app]);
 
                   // Nb avis conducteur
                 $sql_nb_avis = DB::table('tj_user_note')
@@ -64,7 +70,8 @@ class UserNoteController extends Controller
 
             // Note conducteur
             $sql_note = DB::table('tj_user_note')
-            ->select('niveau_driver', 'comment')
+            ->select('niveau_driver','passenger_behaviour','follow_roads','passenger_clean',
+              'find_passenger','drop_passenger', 'comment')
             ->where('id_conducteur','=',DB::raw($id_conducteur))
             ->where('id_user_app','=',DB::raw($id_user_app))
             ->get();
@@ -73,9 +80,19 @@ class UserNoteController extends Controller
             $row['nb_avis'] = $row_nb_avis->nb_avis;
             if(!empty($sql_note)){
                 $row['niveau_driver'] = $row_note->niveau_driver;
+                $row['follow_roads'] = $row_note->follow_roads;
+                $row['passenger_clean'] = $row_note->passenger_clean;
+                $row['find_passenger'] = $row_note->find_passenger;
+                $row['drop_passenger'] = $row_note->drop_passenger;
+                $row['passenger_behaviour'] = $row_note->passenger_behaviour;
                 $row['comment'] = $row_note->comment;
             }else{
                 $row['niveau_driver'] = "";
+                $row['follow_roads'] = "";
+                $row['passenger_clean'] = "";
+                $row['drop_passenger'] = "";
+                $row['find_passenger'] = "";
+                $row['passenger_behaviour'] = "";
                 $row['comment'] = "";
             }
             $row['moyenne'] = $moyenne;
@@ -87,8 +104,10 @@ class UserNoteController extends Controller
         }
 
         else {
-            $insertdata = DB::insert("insert into tj_user_note(niveau_driver,ride_id,id_conducteur,id_user_app,statut,creer,modifier,comment)
-            values('".$note_value."','".$ride_id."','".$id_conducteur."','".$id_user_app."','yes','".$date_heure."','".$date_heure."','".$comment."')");
+            $insertdata = DB::insert("insert into tj_user_note(niveau_driver,passenger_behaviour,
+            follow_roads,passenger_clean,find_passenger,drop_passenger,ride_id,id_conducteur,id_user_app,statut,creer,modifier,comment)
+            values('".$note_value."',".$passenger_behaviour."','".$follow_roads."','".$passenger_clean."','".$find_passenger."',
+            '".$drop_passenger."','".$ride_id."','".$id_conducteur."','".$id_user_app."','yes','".$date_heure."','".$date_heure."','".$comment."')");
             $id=DB::getPdo()->lastInsertId();
             if ($insertdata > 0) {
                 $row = [];
@@ -108,7 +127,8 @@ class UserNoteController extends Controller
 
                 // Note conducteur
                 $sql_note = DB::table('tj_user_note')
-                ->select('niveau_driver', 'comment')
+                ->select('niveau_driver','passenger_behaviour','follow_roads','passenger_clean',
+                'find_passenger','drop_passenger','comment')
                 ->where('id_conducteur','=',DB::raw($id_conducteur))
                 ->where('id_user_app','=',DB::raw($id_user_app))
                 ->get();
@@ -118,9 +138,19 @@ class UserNoteController extends Controller
 
                 if(!empty($sql_note)){
                     $row['niveau_driver'] = $row_note->niveau_driver;
+                    $row['follow_roads'] = $row_note->follow_roads;
+                    $row['passenger_clean'] = $row_note->passenger_clean;
+                    $row['find_passenger'] = $row_note->find_passenger;
+                    $row['drop_passenger'] = $row_note->drop_passenger;
+                    $row['passenger_behaviour'] = $row_note->passenger_behaviour;
                     $row['comment'] = $row_note->comment;
                 }else{
                     $row['niveau_driver'] = "";
+                    $row['follow_roads'] = "";
+                    $row['passenger_clean'] = "";
+                    $row['drop_passenger'] = "";
+                    $row['find_passenger'] = "";
+                    $row['passenger_behaviour'] = "";
                     $row['comment'] = "";
                 }
                 $row['moyenne'] = $moyenne;
