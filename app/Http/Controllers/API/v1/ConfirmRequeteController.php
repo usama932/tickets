@@ -9,6 +9,7 @@ use App\Http\Controllers\API\v1\GcmController;
 use Illuminate\Support\Facades\Log;
 use App\Models\RemainingToken;
 use App\Models\RideSetting;
+use App\Models\RideFareRangeTokens;
 use DB;
 
 
@@ -106,8 +107,11 @@ class ConfirmRequeteController extends Controller
         $gift_token =  RideSetting::latest()->first();
         if($gift_token){
             $rem =  RemainingToken::where('user_id', $from_id)->first();
-            if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $gift_token->ride_token){
-                $rem->tokens = $rem->tokens - $gift_token->ride_token;
+            $needtoken = RideFareRangeTokens::where('ride_setting_id',$gift_token->id)
+                                                ->where('from_range','>',$request->fare_estimate)
+                                                ->where('from_range','<=',$request->fare_estimate)->first();
+            if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $needtoken){
+                $rem->tokens = $rem->tokens - $needtoken;
                 $rem->save();
             }
             else{
