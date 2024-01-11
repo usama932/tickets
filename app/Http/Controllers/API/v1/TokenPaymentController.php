@@ -17,6 +17,7 @@ use Stripe\Stripe;
 use Stripe\Balance;
 use Stripe\Customer;
 use Stripe\Token;
+use App\Models\RideFareRangeTokens;
 
 
 
@@ -66,7 +67,20 @@ class TokenPaymentController extends Controller
     }
 
     public function passenger_not_show(Request $request){
-        dd('asss');
+  
+        $needtoken = RideFareRangeTokens::where('from_range','>',$request->fare_estimate)
+                                            ->where('from_range','<=',$request->fare_estimate)->first();
+        $rem =  RemainingToken::where('user_id', $request->driver_id)->first();
+        if(!empty($rem)){
+            $rem->tokens = $rem->tokens + $needtoken;
+            $rem->save();
+            $response['success'] = 'succcess';
+            $response['error'] = 'Your token is return in your account :Thank You';
+        }
+        else{
+            $response['success'] = 'Failed';
+            $response['error'] = 'Your Session is expired';
+        }
     }
     
     public function remain_token(Request $request){
