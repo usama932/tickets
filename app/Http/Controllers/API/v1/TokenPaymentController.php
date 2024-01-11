@@ -74,7 +74,7 @@ class TokenPaymentController extends Controller
         if(!empty($rem)){
             $rem->tokens = $rem->tokens + $needtoken;
             $rem->save();
-            $response['success'] = 'succcess';
+            $response['success'] = 'success';
             $response['error'] = 'Your token is return in your account :Thank You';
         }
         else{
