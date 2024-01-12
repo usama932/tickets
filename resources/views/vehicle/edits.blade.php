@@ -51,19 +51,13 @@
                                                 <label class="col-3 control-label">{{trans('lang.vehicle_type')}}</label>
                                                 <div class="col-7">
                                                     <select  class="form-control brand_id" name="libelle">
-                                                        <option value="">--! Select Type !--</option>
+    
                                                         <option value="Passengers" @if($type->libelle == "Passengers") selected @endif>Passengers</option>
-                                                        <option value="Passengers & Parcel" @if(
-                                                </div>
+                                                        <option value="Passengers & Parcel" @if($type->libelle == "Passengers & Parcel") selected @endif>Passengers & Parcel</option>
+                                                        <option value="Passengers ,Parcel & Pets" @if($type->libelle == "Passengers ,Parcel & Pets") selected @endif>Passengers ,Parcel & Pets</option>
+                                                    </select>
+                                                    </div>
                                             </div>
-
-                                        <!-- <div class="form-group row width-50">
-              <label class="col-3 control-label">{{trans('lang.price')}}</label>
-              <div class="col-7">
-                <input type="text" class="form-control" name="prix" value="{{$type->prix}}">
-               <div class="form-text text-muted"></div>-->
-                                            <!--</div>
-                                         </div> -->
 
                                             <div class="form-group row width-50">
                                                 <label class="col-3 control-label">{{trans('lang.Image')}}</label>

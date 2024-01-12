@@ -167,7 +167,6 @@ class RidesController extends Controller
                $rides=$rides->paginate(20);
 
         }
-
         return view("rides.all")->with("rides", $rides)->with('currency', $currency)->with('id',$id);
     }
 
