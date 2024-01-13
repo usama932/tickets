@@ -46,11 +46,11 @@ class ConfirmRequeteController extends Controller
    
     if($gift_token){
         $rem =  RemainingToken::where('user_id', $from_id)->first();
-        dd($request->fare_estimate);
+       
 
         $needtoken = RideFareRangeTokens::where('from_range','>',$request->fare_estimate)
-                                            ->where('from_range','<=',$request->fare_estimate)->first();
-
+                                            ->where('to_range','<=',$request->fare_estimate)->first();
+                                            dd($needtoken);
         if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $needtoken){
             $rem->tokens = $rem->tokens - $needtoken;
             $rem->save();
