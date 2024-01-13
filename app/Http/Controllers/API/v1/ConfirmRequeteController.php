@@ -172,12 +172,12 @@ class ConfirmRequeteController extends Controller
 
     // }
 }
-else {
-    $response['success'] = 'Failed';
-    $response['error'] = 'some field are missing';
+// else {
+//     $response['success'] = 'Failed';
+//     $response['error'] = 'some field are missing';
 
-}
-    return response()->json($response);
-  }
+// }
+//     return response()->json($response);
+//   }
 
 }
