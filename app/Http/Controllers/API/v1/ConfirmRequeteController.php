@@ -106,7 +106,6 @@ class ConfirmRequeteController extends Controller
         }
         $gift_token =  RideSetting::latest()->first();
         if($gift_token){
-            dd($gift_token);
             $rem =  RemainingToken::where('user_id', $from_id)->first();
             $needtoken = RideFareRangeTokens::where('ride_setting_id',$gift_token->id)
                                                 ->where('from_range','>',$request->fare_estimate)
