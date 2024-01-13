@@ -50,10 +50,12 @@ class ConfirmRequeteController extends Controller
 
         $needtoken = RideFareRangeTokens::where('from_range','<',$request->fare_estimate)
                                             ->where('to_range','>=',$request->fare_estimate)->first();
-                                            dd($needtoken);
+                                  
         if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $needtoken){
-            $rem->tokens = $rem->tokens - $needtoken;
+            $rem->tokens = $rem->tokens - $needtoken->token;
+
             $rem->save();
+            dd($rem);
         }
         else{
             $response['success'] = 'Failed';
