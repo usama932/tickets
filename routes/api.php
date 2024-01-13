@@ -322,6 +322,7 @@ Route::post('v1/resert-password/', [ResertPasswordController::class, 'resertPass
     Route::post('v1/get/coupons/{id}', [TokenPaymentController::class, 'get_coupen']);
     Route::post('v1/coupons/{code}', [TokenPaymentController::class, 'coupen']);
     Route::post('v1/user_coupons/{user_id}', [TokenPaymentController::class, 'get_user_coupon']);
+    Route::get('v1/use_coupons/{driver_id}', [TokenPaymentController::class, 'get_use_coupon']);
 
     Route::post('v1/destination', [DriverController::class, 'destination']);
     Route::get('v1/ride_settings', [TokenPaymentController::class, 'settings']);
@@ -340,6 +341,7 @@ Route::post('v1/user-login-ag/', [User_LoginController::class, 'login']);
 Route::get('v1/payfast/', [PayFastController::class, 'getData']);
 Route::post('v1/user-photo/', [OldUserPhotoController::class, 'UpdateUserPhoto']);
 Route::post('v1/confirm-requete-book/', [ConfirmedRequeteBookController::class, 'confirmRequest']);
+Route::get('v1/driver_reached/{user_id}', [UserController::class, 'reached_token']);
 //not found end
 
 Route::post('search_driver', [\App\Http\Controllers\API\v1\CustomerCurrentLocationController::class, 'updateLocation']);
