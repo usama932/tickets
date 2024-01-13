@@ -43,9 +43,11 @@ class ConfirmRequeteController extends Controller
     $lat_client=str_replace("."," ",$lat_client);
     $lng_client=str_replace("."," ",$lng_client);
     $gift_token =  RideSetting::latest()->first();
-    dd($gift_token);
+   
     if($gift_token){
         $rem =  RemainingToken::where('user_id', $from_id)->first();
+        dd($rem);
+
         $needtoken = RideFareRangeTokens::where('from_range','>',$request->fare_estimate)
                                             ->where('from_range','<=',$request->fare_estimate)->first();
 
