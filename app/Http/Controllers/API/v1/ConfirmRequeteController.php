@@ -25,7 +25,7 @@ class ConfirmRequeteController extends Controller
             $tokens[] = $user->fcm_id;
         }
         $temp = array();
-        $message = "Your Ride is near to You";
+        $message = array("body"=>'Your ride is near to you',"title"=>"Ride","sound"=>'Set',"tag"=>"Your ride is near to you");
         if (count($tokens) > 0) {   
             Log::info('inside');
             $gcm = GcmController::send_notification($tokens, $message, $temp);
