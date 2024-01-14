@@ -29,7 +29,7 @@ class ConfirmRequeteController extends Controller
         if (count($tokens) > 0) {   
             Log::info('inside');
             $gcm = GcmController::send_notification($tokens, $message, $temp);
-            dd( $gcm);
+           
         }
         $response['success'] = 'success';
         $response['error'] = 'null';
