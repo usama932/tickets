@@ -66,7 +66,7 @@ class RequeteUserappController extends Controller
        if($row->trajet != ''){
         if(!empty($row->trajet ))
         {
-            $image_trajet =asset('images/recu_trajet_course').'/'. $row->trajet;
+            $image_trajet =asset('assets/images/driver/' . $row->photo_path);
         }
         else
         {
@@ -78,7 +78,7 @@ class RequeteUserappController extends Controller
     if($row->photo_path != ''){
         if(!empty($row->photo_path ))
         {
-            $image_user =asset('assets/images/driver').'/'. $row->photo_path;
+            $image_user =   
         }
         else
         {
