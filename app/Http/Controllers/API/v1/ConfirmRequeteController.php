@@ -32,6 +32,7 @@ class ConfirmRequeteController extends Controller
         }
         $response['success'] = 'success';
         $response['error'] = 'null';
+        return response()->json($response);
     }
     public function confirmRequest(Request $request)
     {

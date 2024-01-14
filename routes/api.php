@@ -341,7 +341,7 @@ Route::post('v1/user-login-ag/', [User_LoginController::class, 'login']);
 Route::get('v1/payfast/', [PayFastController::class, 'getData']);
 Route::post('v1/user-photo/', [OldUserPhotoController::class, 'UpdateUserPhoto']);
 Route::post('v1/confirm-requete-book/', [ConfirmedRequeteBookController::class, 'confirmRequest']);
-Route::get('v1/driver_reached/{user_id}', [UserController::class, 'reached_token']);
+Route::get('v1/driver_reached/{user_id}', [ConfirmRequeteController::class, 'reached_token']);
 //not found end
 
 Route::post('search_driver', [\App\Http\Controllers\API\v1\CustomerCurrentLocationController::class, 'updateLocation']);
