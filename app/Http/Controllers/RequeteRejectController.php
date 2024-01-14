@@ -167,7 +167,7 @@ class RequeteRejectController extends Controller
 
 
             if($row->trajet != ''){
-                if(file_exists('images/recu_trajet_course'.'/'.$row->trajet ))
+                if(!empty($row->trajet ))
                 {
                     $image_tranjet = asset('images/recu_trajet_course').'/'. $row->trajet;
                 }
@@ -179,7 +179,7 @@ class RequeteRejectController extends Controller
                 $row->trajet = $image_tranjet;
             }
             if($row->photo_path != ''){
-                if(file_exists('assets/images/users'.'/'.$row->photo_path ))
+                if(($row->photo_path ))
                 {
                     $image = asset('assets/images/users').'/'. $row->photo_path;
                 }
@@ -191,7 +191,7 @@ class RequeteRejectController extends Controller
                 $row->photo_path = $image;
             }
             if($row->payment_image != ''){
-                if(file_exists('assets/images/payment_method'.'/'.$row->payment_image ))
+                if(!empty($row->payment_image ))
                 {
                     $image_payment = asset('assets/images/payment_method').'/'. $row->payment_image;
                 }

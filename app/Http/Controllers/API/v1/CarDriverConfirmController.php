@@ -9,23 +9,6 @@ use DB;
 class CarDriverConfirmController extends Controller
 {
 
-   public function __construct()
-   {
-      $this->limit=20;   
-   }
-  /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-//   public function index()
-//   {
-    
-//     $driver = Vehicle::all();
-//     $driver = Vehicle::paginate($this->limit);
-//     return response()->json($driver);
-//   }
-
   public function confirm(Request $request)
   {
     $id_requete = $request->get('id_ride');

@@ -45,7 +45,7 @@ class CarServiceBookController extends Controller
             
             $car = $row['photo_car_service_book_path'];
             if($car != ''){
-              if(file_exists('assets/images/vehicule'.'/'.$car ))
+              if(!empty($car ))
               {
                   $car = asset('assets/images/vehicule').'/'. $car;
               }
