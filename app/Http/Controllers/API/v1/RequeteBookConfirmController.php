@@ -14,11 +14,7 @@ class RequeteBookConfirmController extends Controller
    {
       $this->limit=20;
    }
-  /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+
 
   public function getData(Request $request)
   {

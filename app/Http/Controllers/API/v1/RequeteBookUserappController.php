@@ -174,8 +174,8 @@ class RequeteBookUserappController extends Controller
         // output data of each row
         foreach ($sql as $row) {
             if (!empty($row->photo_path)) {
-                if (file_exists('assets/images/driver' . '/' . $row->photo_path)) {
-                    $image_user = asset('assets/images/driver') . '/' . $row->photo_path;
+                if (file_exists('assets/images/users' . '/' . $row->photo_path)) {
+                    $image_user = asset('assets/images/users') . '/' . $row->photo_path;
                 } else {
                     $image_user = asset('assets/images/placeholder_image.jpg');
 
