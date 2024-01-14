@@ -66,7 +66,7 @@ class RequeteUserappController extends Controller
        if($row->trajet != ''){
         if(!empty($row->trajet ))
         {
-            $image_trajet =asset('assets/images/driver/' . $row->photo_path);
+            $image_trajet =asset('images/recu_trajet_course').'/'. $row->trajet;
         }
         else
         {
@@ -75,10 +75,10 @@ class RequeteUserappController extends Controller
         }
         $row->trajet = $image_trajet;
     }
-    if($row->photo_path != ''){
+    
         if(!empty($row->photo_path ))
         {
-            $image_user =   
+            $image_user =asset('assets/images/driver/' . $row->photo_path);
         }
         else
         {
@@ -86,7 +86,7 @@ class RequeteUserappController extends Controller
 
         }
         $row->photo_path = $image_user;
-    }
+   
     if($row->payment_image != ''){
         if(!empty($row->payment_image))
         {
