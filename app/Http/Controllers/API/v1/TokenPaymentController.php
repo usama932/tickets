@@ -381,5 +381,6 @@ class TokenPaymentController extends Controller
         $response['success']= 'success';
         $response['error']= null;
         $response['coupens'] = $coupens;
+        return response()->json($response);
     }
 }
