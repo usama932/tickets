@@ -28,7 +28,8 @@ class ConfirmRequeteController extends Controller
         $message = "Your Ride is near to You";
         if (count($tokens) > 0) {   
             Log::info('inside');
-            GcmController::send_notification($tokens, $message, $temp);
+            $gcm = GcmController::send_notification($tokens, $message, $temp);
+            dd( $gcm);
         }
         $response['success'] = 'success';
         $response['error'] = 'null';
