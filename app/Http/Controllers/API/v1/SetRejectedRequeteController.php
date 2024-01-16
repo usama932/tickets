@@ -24,7 +24,6 @@ class SetRejectedRequeteController extends Controller
      */
     public function rejectedRequest(Request $request)
     {
-
         $id_requete = $request->get('id_ride');
         $id_user = $request->get('id_user');
         $driver_name = $request->get('name');
