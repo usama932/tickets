@@ -116,7 +116,7 @@ class RequeteBookController extends Controller
 
                 $row->creer = date("d", strtotime($row->creer)) . " " . $months[date("F", strtotime($row->creer))] . ". " . date("Y", strtotime($row->creer));
                 if ($row->trajet != '') {
-                    if (file_exists('images/recu_trajet_course' . '/' . $row->trajet)) {
+                    if (!empty($row->trajet)) {
                         $image_user = asset('images/recu_trajet_course') . '/' . $row->trajet;
                     } else {
                         $image_user = asset('assets/images/placeholder_image.jpg');
@@ -125,7 +125,7 @@ class RequeteBookController extends Controller
                     $row->trajet = $image_user;
                 }
                 if ($row->payment_image != '') {
-                    if (file_exists('assets/images/payment_method' . '/' . $row->payment_image)) {
+                    if (!empty($row->payment_image)) {
                         $image = asset('assets/images/payment_method') . '/' . $row->payment_image;
                     } else {
                         $image = asset('assets/images/placeholder_image.jpg');
@@ -196,7 +196,7 @@ class RequeteBookController extends Controller
             // output data of each row
             foreach ($sql as $row) {
                 if ($row->photo_path != '') {
-                    if (file_exists('assets/images/users' . '/' . $row->photo_path)) {
+                    if (!empty( $row->photo_path)) {
                         $image_user = asset('assets/images/users') . '/' . $row->photo_path;
                     } else {
                         $image_user = asset('assets/images/placeholder_image.jpg');
@@ -289,7 +289,7 @@ class RequeteBookController extends Controller
 
                 $row->creer = date("d", strtotime($row->creer)) . " " . $months[date("F", strtotime($row->creer))] . ". " . date("Y", strtotime($row->creer));
                 if ($row->trajet != '') {
-                    if (file_exists('images/recu_trajet_course' . '/' . $row->trajet)) {
+                    if (!empty($row->trajet)) {
                         $image_user = asset('images/recu_trajet_course') . '/' . $row->trajet;
                     } else {
                         $image_user = asset('assets/images/placeholder_image.jpg');

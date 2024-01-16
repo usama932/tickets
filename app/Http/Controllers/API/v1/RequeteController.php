@@ -315,7 +315,7 @@ class RequeteController extends Controller
                 $row->creer = date("d", strtotime($row->creer)) . " " . $months[date("F", strtotime($row->creer))] . ", " . date("Y", strtotime($row->creer));
                 $row->date_retour = date("d", strtotime($row->date_retour)) . " " . $months[date("F", strtotime($row->date_retour))] . ", " . date("Y", strtotime($row->date_retour));
                 if ($row->photo_path != '') {
-                    if (file_exists('assets/images/users' . '/' . $row->photo_path)) {
+                    if (!empty($row->photo_path)) {
                         $image_user = asset('assets/images/users') . '/' . $row->photo_path;
                     } else {
                         $image_user = asset('assets/images/placeholder_image.jpg');
