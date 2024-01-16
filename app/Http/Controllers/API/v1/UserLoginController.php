@@ -79,7 +79,7 @@ class UserLoginController extends Controller
 
                             if (!empty($row)) {
 
-                                if ( $row['photo_path']) {
+                                if ( !empty($row['photo_path'])) {
                                     $image_user = asset('assets/images/users') . '/' . $row['photo_path'];
                                 } else {
                                     $image_user = asset('assets/images/placeholder_image.jpg');
