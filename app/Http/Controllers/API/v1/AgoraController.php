@@ -19,8 +19,9 @@ class AgoraController extends Controller
         $expireTimeInSeconds = 3600;
         $currentTimestamp = (new \DateTime("now", new \DateTimeZone('UTC')))->getTimestamp();
         $privilegeExpiredTs = $currentTimestamp + $expireTimeInSeconds;
-    
-        return RtcTokenBuilder::buildTokenWithUid($appID, $appCertificate, $channelName, $uid, $role, $privilegeExpiredTs);
+        $token =  RtcTokenBuilder::buildTokenWithUid($appID, $appCertificate, $channelName, $uid, $role, $privilegeExpiredTs);
+        return response()->json($token);
+       
     
     }
 }
