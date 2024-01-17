@@ -12,7 +12,7 @@ class AgoraController extends Controller
         $appCertificate = '7bb4f4c5eb1246cdb0557858fa751500';
 
         $channelName = $request->channelName;
-        $user = Auth::user()->name;
+        $user = $request->uid;
         $role = RtcTokenBuilder::RoleAttendee;
         $expireTimeInSeconds = 36000;
         $currentTimestamp = now()->getTimestamp();

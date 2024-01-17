@@ -115,8 +115,9 @@ use App\Http\Controllers\API\v1\VehicleColorController;
 use App\Http\Controllers\API\v1\VehicleController;
 use App\Http\Controllers\API\v1\VehicleImagesController;
 use App\Http\Controllers\API\v1\VehicleModelController;
-use App\Http\Controllers\API\v1\VehicleNumberplateController;
 use App\Http\Controllers\API\v1\AgoraController;
+use App\Http\Controllers\API\v1\VehicleNumberplateController;
+
 use App\Http\Controllers\API\v1\wallet;
 use App\Http\Controllers\API\v1\DriverRideReviewController;
 use Illuminate\Http\Request;
@@ -355,10 +356,8 @@ Route::get('v1/all-chats',[\App\Http\Controllers\API\v1\ChatController::class,'a
 Route::get('v1/all-chat-messages',[\App\Http\Controllers\API\v1\ChatController::class,'getChatMessage']);
 
 
-// Agora routes
-Route::post('v1/all-chat-messages',[\App\Http\Controllers\API\v1\AgoraController::class,'createRoom']);
-Route::post('/agora/join-room',[\App\Http\Controllers\API\v1\AgoraController::class,'joinRoom']);
-Route::post('/agora/end-call',[\App\Http\Controllers\API\v1\AgoraController::class,'endCall']);
+
+Route::post('/agora/rtc_token',[AgoraController::class,'rtc_token']);
 
 
 
