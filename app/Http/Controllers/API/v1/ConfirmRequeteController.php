@@ -10,14 +10,32 @@ use Illuminate\Support\Facades\Log;
 use App\Models\RemainingToken;
 use App\Models\RideSetting;
 use App\Models\RideFareRangeTokens;
+use App\Models\DriverTime;
 use App\Models\UserApp;
 use DB;
+use Carbon\Carbon;
 
 
 class ConfirmRequeteController extends Controller
 {
 
-    
+    public function driver_hours($driver_id){
+        $mytime = Carbon::now();
+        $time = $mytime->toDateTimeString();
+        $drivertime = DriverTime::where('driver_id',$driver_id)->whereDate('start_time', $time )->first();
+        if(!empty($drivertime)){
+            $response['success'] = 'success';
+            $response['error'] = null;
+            $response['message'] = 'driver get successfully ';
+            $response['drivertime'] = $drivertime;
+        }else{
+            $response['success'] = 'success';
+            $response['error'] = null;
+            $response['message'] = 'driver not get successfully';
+            $response['drivertime'] = '';
+        }
+      
+    }
     public function reached_token($user_id){
         $tokens = array();
         $user = UserApp::where('id',$user_id)->first();
@@ -175,6 +193,17 @@ class ConfirmRequeteController extends Controller
                     $row['from_id'] = $data['from_id'];
                     $row['type'] = $data['type'];
 
+            }
+            $mytime = Carbon::now();
+            $time = $mytime->toDateTimeString();
+             
+            $drivertime = DriverTime::where('driver_id',$from_id)->whereDate('start_time', $time )->first();
+            if(empty($drivertime)){
+                DriverTime::create([
+                    'driver_id' => $from_id,
+                    'start_time' =>  $time,
+                    
+                ]);
             }
             $response['success'] = 'success';
             $response['error'] = null;

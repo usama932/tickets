@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\VehicleType;
 use App\Models\Commission;
 use Illuminate\Http\Request;
+use App\Models\DriverTime;
+use Carbon\Carbon;
 use DB;
 class RequeteCompleteController extends Controller
 {
@@ -216,6 +218,17 @@ class RequeteCompleteController extends Controller
 
                 }
                 $row->payment_image = $image_payment;
+            }
+           
+            $mytime = Carbon::now();
+            $time = $mytime->toDateTimeString();
+            $drivertime = DriverTime::where('driver_id',$id_driver)->whereDate('start_time', $time )->first();
+            $hours = $drivertime->diffInHours($time);
+            if(!empty($drivertime)){
+                DriverTime::where('driver_id',$drivertime->driver_id)->update([
+                    'driver_id' =>  $id_driver,
+                    'end_time'  =>  $time,
+                ]);
             }
             $output[] = $row;
         }
