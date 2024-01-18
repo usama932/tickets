@@ -30,11 +30,13 @@ class ConfirmRequeteController extends Controller
             $response['error'] = null;
             $response['message'] = 'driver get successfully ';
             $response['drivertime'] = $drivertime;
+            return $response;
         }else{
             $response['success'] = 'success';
             $response['error'] = null;
             $response['message'] = 'driver not get successfully';
             $response['drivertime'] = '';
+            return $response;
         }
       
     }
