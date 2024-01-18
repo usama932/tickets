@@ -220,16 +220,6 @@ class RequeteCompleteController extends Controller
                 $row->payment_image = $image_payment;
             }
            
-            $mytime = Carbon::now();
-            $time = $mytime->toDateTimeString();
-            $drivertime = DriverTime::where('driver_id',$id_driver)->whereDate('start_time', $time )->first();
-            $hours = $drivertime->diffInHours($time);
-            if(!empty($drivertime)){
-                DriverTime::where('driver_id',$drivertime->driver_id)->update([
-                    'driver_id' =>  $id_driver,
-                    'end_time'  =>  $time,
-                ]);
-            }
             $output[] = $row;
         }
         if(!empty($row)){

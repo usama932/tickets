@@ -6,6 +6,8 @@ use App\Models\Requests;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\v1\GcmController;
+use App\Models\DriverTime;
+use Carbon\Carbon;
 use DB;
 class CompleteRequeteController extends Controller
 {
@@ -112,6 +114,16 @@ class CompleteRequeteController extends Controller
                 $row['to_id'] = $data['to_id'];
                 $row['from_id'] = $data['from_id'];
                 $row['type'] = $data['type'];
+        }
+       
+        $mytime = Carbon::now();
+        $time = $mytime->toDateTimeString();
+        $drivertime = DriverTime::where('driver_id',$from_id)->whereDate('start_time', $time )->first();
+        $hours = $drivertime->diffInHours($time);
+        if(!empty($drivertime)){
+            DriverTime::where('driver_id',$drivertime->driver_id)->update([
+                'end_time'  =>  $time,
+            ]);
         }
         $response['success'] = 'success';
         $response['error'] = null;
