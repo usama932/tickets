@@ -195,10 +195,11 @@ class ConfirmRequeteController extends Controller
                     $row['type'] = $data['type'];
 
             }
+           
             $mytime = Carbon::now();
-            $time = $mytime->toDateTimeString();
-             
-            $drivertime = DriverTime::where('driver_id',$from_id)->whereDate('start_time', $time )->first();
+            $time = $mytime->toDateString(); // Get only the date part
+            
+            $drivertime = DriverTime::where('driver_id', $from_id)->whereDate('start_time', $time)->first();
             if(empty($drivertime)){
                 DriverTime::create([
                     'driver_id' => $from_id,
