@@ -120,8 +120,10 @@ class CompleteRequeteController extends Controller
         $time = $mytime->toDateString(); // Get only the date part
         
         $drivertime = DriverTime::where('driver_id', $from_id)->whereDate('start_time', $time)->first();
-        $starttime = $drivertime->start_time;
+        $starttime = Carbon::parse($drivertime->start_time);
+        $time = Carbon::parse($time);
         $hours = $starttime->diffInHours($time);
+        
         if(!empty($drivertime)){
             DriverTime::where('driver_id',$drivertime->driver_id)->update([
                 'end_time'  =>  $time,
