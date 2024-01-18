@@ -376,7 +376,7 @@ class TokenPaymentController extends Controller
         // }
     }
     public function get_use_coupon($driver_id){
-        $coupens = CouponUse::where('driver_id',$driver_id)->get();
+        $coupens = CouponUse::where('driver_id',$driver_id)->with('user')->get();
         
         $response['success']= 'success';
         $response['error']= null;
