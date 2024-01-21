@@ -152,7 +152,9 @@
             <ul aria-expanded="false" class="collapse">
                 <li><a href="{!! url('reports/userreport') !!}">{{trans('lang.user_reports')}}</a></li>
                 <li><a href="{!! url('reports/driverreport') !!}">{{trans('lang.driver_reports')}}</a></li>
-                <li><a href="{!! url('reports/travelreport') !!}">{{trans('lang.travel_report')}}</a></li>
+                {{-- <li><a href="{!! url('reports/travelreport') !!}">{{trans('lang.travel_report')}}</a></li>
+                 --}}
+                 <li><a href="{{route('ridehistory')}}">Ride History</a></li>
             </ul>
         </li>
     </ul>

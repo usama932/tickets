@@ -136,6 +136,7 @@ Route::get('/vehicle-rental-type/delete/{id}', [App\Http\Controllers\VehicleType
 Route::post('rental_vehicle_type/switch', [App\Http\Controllers\VehicleTypeRentalController::class, 'toggalSwitch']);
 
 Route::get('/reports/userreport', [App\Http\Controllers\ReportController::class, 'userreport'])->name('userreport');
+Route::get('/reports/ridehistory', [App\Http\Controllers\ReportController::class, 'ridehistory'])->name('ridehistory');
 Route::get('/reports/downloadExcel', [App\Http\Controllers\ReportController::class, 'downloadExcel'])->name('userreport.downloadExcel');
 Route::get('/reports/driverreport', [App\Http\Controllers\ReportController::class, 'driverreport'])->name('driverreport');
 Route::get('/reports/downloadExcelDriver', [App\Http\Controllers\ReportController::class, 'downloadExcelDriver'])->name('driverreport.downloadExcelDriver');

@@ -844,4 +844,14 @@ class ReportController extends Controller
        fclose($fp);
 
     }
+    public function ridehistory(){
+        $datas = Requests::leftJoin('tj_conducteur as driver', 'tj_requete.id_conducteur', '=', 'driver.id')
+                            ->leftJoin('tj_vehicule as vehicle', 'driver.id', '=', 'vehicle.id_conducteur')
+                            ->leftJoin('tj_user_app as user', 'tj_requete.id_user_app', '=', 'user.id')
+        ->select('tj_requete.*', 'driver.nom as driver_name' ,'user.nom as user_name','driver.phone as driver_phone','driver.wheel_chair',
+                  'vehicle.numberplate'  )
+        ->get();
+      
+        return view('reports.ride_history',compact('datas'));
+    }
 }
