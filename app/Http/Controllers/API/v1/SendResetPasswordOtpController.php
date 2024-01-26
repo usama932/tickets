@@ -80,7 +80,7 @@ class SendResetPasswordOtpController extends Controller
 
     }
         if(!empty($user_id)){
-            dd($user_id);
+          
             $to = $email;
             $subject = "Reset your Password ";
             $message = '
@@ -109,7 +109,7 @@ class SendResetPasswordOtpController extends Controller
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\b";
             //$headers .= 'From: Reyi'"\r\n";
-            mail($to,$subject,$message,$headers);
+             dd(mail($to,$subject,$message,$headers));
 
         $response['success'] = 'success';
         $response['error']= null;
