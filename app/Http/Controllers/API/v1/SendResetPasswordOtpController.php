@@ -108,7 +108,7 @@ class SendResetPasswordOtpController extends Controller
             // Always set content-type when sending HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\b";
-            //$headers .= 'From: Reyi'"\r\n";
+            $headers .= 'From: Reyi';
              dd(mail($to,$subject,$message,$headers));
 
         $response['success'] = 'success';
