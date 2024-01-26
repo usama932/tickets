@@ -12,16 +12,7 @@ use DB;
 class SendResetPasswordOtpController extends Controller
 {
 
-   public function __construct()
-   {
-      $this->limit=20;   
-   }
-  /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-  
+
 
   public function resetPasswordOtp(Request $request)
   {
@@ -54,7 +45,7 @@ class SendResetPasswordOtpController extends Controller
         $response['success'] = 'Failed';
         $response['error'] = 'Email is not Exist';
     }
-}
+    }
         elseif($user_cat == 'driver'){
 
             $sql = DB::table('tj_conducteur')
@@ -89,7 +80,7 @@ class SendResetPasswordOtpController extends Controller
 
     }
         if(!empty($user_id)){
-
+            dd($user_id);
             $to = $email;
             $subject = "Reset your Password ";
             $message = '
