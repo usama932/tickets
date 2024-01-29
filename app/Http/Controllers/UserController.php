@@ -193,21 +193,13 @@ class UserController extends Controller
     {
 
 
-        if ($request->id > 0) {
-            $image_validation = "required";
-            $doc_validation = "required";
-
-        } else {
-            $image_validation = "required";
-            $doc_validation = "required";
-
-        }
+      
         $validator = Validator::make($request->all(), $rules = [
             'nom' => 'required',
             'prenom' => 'required',
             'phone' => 'required|unique:tj_user_app,phone,' . $id,
             'email' => 'required|unique:tj_user_app,email,' . $id,
-            'photo_path' => $image_validation,
+          
 
         ], $messages = [
             'nom.required' => 'The First Name field is required!',
@@ -216,7 +208,6 @@ class UserController extends Controller
             'email.unique' => 'The Email is already taken!',
             'phone.required' => 'The Phone is required!',
             'phone.unique' => 'The Phone field is should be unique!',
-            'photo_path.required' => 'The Image field is required!',
 
         ]);
 
@@ -263,7 +254,7 @@ class UserController extends Controller
                 $filename = 'user_' . $id . '.' . $extenstion;
                 $file->move(public_path('assets/images/users/'), $filename);
 
-                $user->photo_path = $filename;
+                $user->photo_path = $filename ?? '';
             }
             $user->save();
         }
