@@ -57,7 +57,7 @@ class DriverController extends Controller
             ->where('tj_conducteur.is_verified', '=', '1')->where('tj_conducteur.online', '!=', 'no')
             ->where('tj_type_vehicule.status', '=', 'yes')
             ->where('tj_conducteur.latitude', '!=', '')->where('tj_conducteur.longitude', '!=', '')
-            ->where('remaining_tokens.tokens', '>', 0)
+            ->where('remaining_tokens.tokens', '>', 0)p
             //->groupBy('tj_conducteur.id')
             ->get();
 
