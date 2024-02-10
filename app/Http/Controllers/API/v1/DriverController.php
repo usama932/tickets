@@ -162,7 +162,7 @@ class DriverController extends Controller
     {
         $rad = M_PI / 180;
         return acos(sin($lat2 * $rad) * sin($lat1 * $rad) + cos($lat2 * $rad) * cos($lat1 * $rad)
-                * cos($lng2 * $rad - $lng1 * $rad)) * 6371;// Kilometers
+                * cos($lng2 * $rad - $lng1 * $rad)) * 600;// Kilometers
     }
 
     public function changeStatus(Request $request)
