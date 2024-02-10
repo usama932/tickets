@@ -78,14 +78,17 @@
 						        <li role="presentation" class="">
 						        	<a href="#vehicle" aria-controls="vehicle" role="tab" data-toggle="tab" class="{{ (Request::get('tab') == 'vehicle') ? 'active show' : '' }}">Vehicle</a>
 
+								</li>
+								<li role="presentation" class="">
+						        	<a href="#security" aria-controls="security" role="tab" data-toggle="tab" class="{{ (Request::get('tab') == 'security') ? 'active show' : '' }}">CPV Requirement</a>
 
+								</li>
 						    </ul>
 
 						    <!-- Tab panes -->
 						    <div class="tab-content">
 
 						        <div role="tabpanel" class="tab-pane {{ (Request::get('tab') == 'information' || Request::get('tab') == '') ? 'active' : '' }}" id="information">
-
 						        	<div class="row">
 
 		                                <div class="col-md-6">
@@ -135,7 +138,6 @@
 												<span>{{$driver->account_no}}</span>
 											</div>
 										</div>
-
 		                                <div class="col-md-6">
 		                                  	<div class="col-group">
 		                                		<label for="" class="font-weight-bold">{{trans('lang.ifsc_code')}} :</label>
@@ -148,7 +150,6 @@
 												<span>{{$driver->other_info}}</span>
 											</div>
 										</div>
-
 		                                <div class="col-md-6">
 		                                   	<div class="col-group">
 		                                    	<label for="" class="font-weight-bold">{{trans('lang.created_at')}} :</label>
@@ -156,7 +157,6 @@
                                                       <span class="time">{{ date('h:i A',strtotime($driver->creer))}}</span>
 		                                	</div>
 		                                </div>
-
 		                                <div class="col-md-6">
 		                                  	<div class="col-group">
 		                                  	  <label for="" class="font-weight-bold">{{trans('lang.edited')}} :</label>
@@ -166,14 +166,12 @@
                                                       @endif
 		                                	</div>
 										</div>
-
 										<div class="col-md-6">
 		                                  	<div class="col-group">
 		                                  	  <label for="" class="font-weight-bold">{{trans('lang.wallet_balance')}} :</label>
 		                                    	<span>${{ $driver->amount }}</span>
 		                                	</div>
 										</div>
-
 										<div class="col-md-12">
 		                                    <div class="col-group-btn">
 		                                        @if ($driver->statut=="no")
@@ -183,11 +181,7 @@
 		                                        @endif
 		                                   </div>
 		                                </div>
-
-
-
-		                             </div>
-
+		                            </div>
 						        </div>
 
 						        <div role="tabpanel" class="tab-pane {{ Request::get('tab') == 'rides' ? 'active' : '' }}" id="rides">
@@ -329,6 +323,121 @@
 
 								</div>
 
+								<div role="tabpanel" class="tab-pane {{ Request::get('tab') == 'security' ? 'active' : ''}}" id="security">
+									<div class="card">
+										<h6 class="card-header">DRIVER INDUCTION TRAINING & ACKNOWLEDGEMENT</h6>
+										<div class="card-body">
+											<h5>Driver Fatigue
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>The maximum continuous work duty hours is 12 before an off duty period of at least 8 hours. Whilst on duty you must take a minimum 30 minute break every 6 hours.</p>
+											<h5>Drug and Alcohol
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>It is a legal requirement in the State of Victoria that you must not operate a taxi or any commercial vehicle under the influence of drugs or alcohol. All drivers must always have a 0.00 BAC when driving a CPV.</p>
+											<h5>Maintenance of Vehicles
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>All CPV drivers are responsible for ensuring the vehicle they are operating is in a safe and roadworthy condition. Before each shift you must check the operation of all lights, the operation of all doors and restraints (seatbelts) and make a visual inspection of the body and tyres of the vehicle. Vehicles with any defect that would be deemed as unroadworthy must NOT be operated on our platform under any circumstances. All taxis must also have a roadworthy certificate current to within 365 days.</p>
+											<h5>Emergency Management
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>In the case of an emergency you should dial 000 immediately for assistance if required. Please also contact us on +61 434 423 423 and report the emergency as soon as practicable</p>
+											<h5>Driver Behaviour
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>All drivers on our platform need to conduct themselves in a professional, honest and courteous way at all times. No form of discrimination is acceptable and will not be tolerated.</p>
+											<h5>Medical Fitness
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>If you are feeling unwell or have a contagious disease you must not operate a CPV. If you are suffering a physical injury or taking prescription medication which impacts, or may impact your ability to operate the vehicle, you must not operate the vehicle</p>
+											<h5>COVID19
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>To prevent the spread of coronavirus we ask that you please wipe down the touch points and disinfect your vehicle at the start of every shift. If you have cold and flu symptoms but are well enough to drive, please wear a mask as a precaution. If you test positive to COVID19 we ask that you do not drive for 3 days or while you have symptoms. We recommend that you also have masks and hand sanitizer available to provide to passengers in the event you become aware they are positive for coronavirus.</p>
+											<h5>Notifiable Incidents
+												<i class="fa fa-check" style="font-size:36px;color:green"></i>
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>As a driver you are a duty holder under the CPV regulations, which means you have a legal obligation to report notifiable incidents and you must notify CPV within ten business days of becoming aware an incident has occurred. You can do so using the Notifiable Incidents Portal. It is an offence not to report a notifiable incident. The failure to do so may result in compliance action by Safe Transport Victoria</p>
+											<h5>Reporting Hazards
+												<i class="fa fa-close" style="font-size:36px;color:red"></i>
+												@if(!empty($cpvs))
+													@if($cpvs->driver_fatigue == 1)
+													<i class="fa fa-check" style="font-size:36px;color:green"></i>
+													@else
+													<i class="fa fa-close" style="font-size:36px;color:red"></i>
+													@endif
+												@endif
+											</h5>
+											<p>If you become aware of any hazards please use our WhatsApp group to report the hazard for the safety of other drivers and passengers.</p>
+											<div class="d-flex justify-content-end">
+												<h5>Date:: 
+
+
+												</h5>
+											</div>
+											<div class="d-flex justify-content-end">
+												
+												
+												<h5>Driver Name:: 
+													
+
+												</h5>
+												
+											</div>
+										</div>
+										
+									</div>
+								</div>
 
 
 

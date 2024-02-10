@@ -9,6 +9,7 @@ use App\Models\DriversDocuments;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Driver;
+use App\Models\CpvRequirement;
 
 class DocumentsController extends Controller
 {
@@ -274,6 +275,37 @@ class DocumentsController extends Controller
 
         return response()->json($response);
 
+    }
+    public function cpvRequirement(Request $request){
+        if($request->cpv_id){
+            $cpvs = CpvRequirement::where('id',$request->cpv_id)->update([
+                'driver_fatigue' => $request->driver_fatigue,
+                'drug_alcohol' => $request->drug_alcohol,
+                'maintaing_vehicle' => $request->maintaing_vehicle,
+                'emergency_management' => $request->emergency_management,
+                'driver_behave' => $request->driver_behave,
+                'medical_fitness' => $request->medical_fitness,
+                'covid_19' => $request->covid_19,
+                'notifiable_incidents' => $request->notifiable_incidents,
+                'reporting_hazards' => $request->reporting_hazards,
+            ]);
+        }else{
+            $cpvs = CpvRequirement::create([
+                'driver_fatigue' => $request->driver_fatigue,
+                'drug_alcohol' => $request->drug_alcohol,
+                'maintaing_vehicle' => $request->maintaing_vehicle,
+                'emergency_management' => $request->emergency_management,
+                'driver_behave' => $request->driver_behave,
+                'medical_fitness' => $request->medical_fitness,
+                'covid_19' => $request->covid_19,
+                'notifiable_incidents' => $request->notifiable_incidents,
+                'reporting_hazards' => $request->reporting_hazards,
+            ]);
+        }
+        $response['success'] = 'success';
+        $response['error'] = null;
+        $response['message'] = 'successfully';
+        $response['cpvs'] = $cpvs;
     }
 
 

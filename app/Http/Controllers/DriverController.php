@@ -16,6 +16,7 @@ use App\Models\Note;
 use App\Models\Brand;
 use App\Models\CarModel;
 use App\Models\VehicleType;
+use App\Models\CpvRequirement;
 use App\Models\vehicleImages;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -150,7 +151,7 @@ class DriverController extends Controller
             }else{
             	$document->document_status = 'Disapprove';
 				$document->comment = $comment;
-				$this->notifyDriver($comment,$document->driver_id);
+				// $this->notifyDriver($comment,$document->driver_id);
             }
 			$document->save();
         }
@@ -759,8 +760,8 @@ class DriverController extends Controller
             ->where('tj_requete.id_conducteur', $id)
             ->orderBy('tj_requete.creer', 'DESC')
             ->paginate(10);
-
-        return view('drivers.show')->with('driver', $driver)->with("vehicle", $vehicle)->with("rides", $rides)->with("currency", $currency);
+        $cpvs = CpvRequirement::where('driver_id',$id)->first();
+        return view('drivers.show')->with('driver', $driver)->with("vehicle", $vehicle)->with("rides", $rides)->with("currency", $currency)->with('cpvs', $cpvs);
     }
 
     public function changeStatus($id)
