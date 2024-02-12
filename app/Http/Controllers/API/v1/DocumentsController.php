@@ -277,7 +277,7 @@ class DocumentsController extends Controller
 
     }
     public function cpvRequirement(Request $request){
-        if($request->cpv_id > 0){
+        if($request->cpv_id != 0){
             $cpvs = CpvRequirement::where('id',$request->cpv_id)->update([
                 'driver_fatigue' => $request->driver_fatigue,
                 'drug_alcohol' => $request->drug_alcohol,
