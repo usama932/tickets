@@ -161,8 +161,25 @@ class DriverController extends Controller
     public static function distance($lat1, $lng1, $lat2, $lng2)
     {
         $rad = M_PI / 180;
-        return acos(sin($lat2 * $rad) * sin($lat1 * $rad) + cos($lat2 * $rad) * cos($lat1 * $rad)
-                * cos($lng2 * $rad - $lng1 * $rad)) * 600;// Kilometers
+    
+        // Calculate differences in latitude and longitude in radians
+        $deltaLat = ($lat2 - $lat1) * $rad;
+        $deltaLng = ($lng2 - $lng1) * $rad;
+        
+        // Apply Haversine formula
+        $a = sin($deltaLat / 2) * sin($deltaLat / 2) + cos($lat1 * $rad) * cos($lat2 * $rad) * sin($deltaLng / 2) * sin($deltaLng / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        
+        // Earth's radius in kilometers
+        $earthRadius = 6371;
+        
+        // Calculate distance in kilometers
+        $distance = $earthRadius * $c;
+    
+        // Limit the distance to a maximum of 5 kilometers
+        $maxRange = 5; // Maximum range in kilometers
+        $limitedDistance = min($distance, $maxRange);
+        return $limitedDistance;
     }
 
     public function changeStatus(Request $request)
