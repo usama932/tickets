@@ -161,6 +161,7 @@ Route::post('v1/resert-password/', [ResertPasswordController::class, 'resertPass
     Route::post('v1/driver-documents-add/', [DocumentsController::class, 'addDriverDocuments']);
     Route::post('v1/driver-documents-update/', [DocumentsController::class, 'updateDriverDocuments']);
     Route::post('v1/driver-cpvs/', [DocumentsController::class, 'cpvRequirement']);
+    Route::get('v1/driver-getcpvs/{id}', [DocumentsController::class, 'getcpvRequirement']);
     Route::get('v1/driver-documents/', [DocumentsController::class, 'getDriverDocuments']);
 
     Route::get('v1/get-ride-review/', [RideDetailsController::class, 'getRideReview']);   // get ride reviews of users or driver

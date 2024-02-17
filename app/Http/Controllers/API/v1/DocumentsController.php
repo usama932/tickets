@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Driver;
 use App\Models\CpvRequirement;
+use Carbon\Carbon;
 
 class DocumentsController extends Controller
 {
@@ -277,9 +278,9 @@ class DocumentsController extends Controller
 
     }
     public function cpvRequirement(Request $request){
-       
-        if($request->cpv_id != 0){
-            $cpvs = CpvRequirement::where('id',$request->cpv_id)->update([
+        $driver = CpvRequirement::where('driver_id',$request->driver_id)->first();
+        if(!empty($driver)){
+            $cpvs = CpvRequirement::where('driver_id',$request->driver_id)->update([
                 'driver_fatigue' => $request->driver_fatigue,
                 'drug_alcohol' => $request->drug_alcohol,
                 'maintaing_vehicle' => $request->maintaing_vehicle,
@@ -314,5 +315,27 @@ class DocumentsController extends Controller
         return response()->json($response);
     }
 
-
+    public function getcpvRequirement( $driver_id){
+        $cpvs = CpvRequirement::where('driver_id',$driver_id)->
+                                where('driver_fatigue','1')-> where('maintaing_vehicle','1')-> where('emergency_management','1')
+                                ->where('driver_behave','1')->where('medical_fitness','1')->where('covid_19','1')
+                                ->where('notifiable_incidents','1')-> where('notifiable_incidents','1')->where('notifiable_incidents','1')
+                                ->where('updated_at', '>', Carbon::now()->subMonths(6))
+                                ->first();
+                            
+        if(!empty($cpv)){
+            $response['success'] = 'success';
+            $response['error'] = null;
+            $response['message'] = 'successfully';
+            $response['cpvs'] = 'false';
+            return response()->json($response);
+        }
+        else{
+            $response['success'] = 'success';
+            $response['error'] = null;
+            $response['message'] = 'successfully';
+            $response['cpvs'] = 'true';
+            return response()->json($response);
+        }
+    }
 }
