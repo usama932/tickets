@@ -84,7 +84,7 @@ class ConfirmRequeteController extends Controller
                                                 ->where('to_range','>=',$request->fare_estimate)
                                                 ->first();
                                                             
-            if(!empty($rem) && $rem->tokens > 0 && $rem->tokens >=  $needtoken->token){
+            if(!empty($rem) && $rem->tokens > 0 ){
     
                 $rem->tokens = $rem->tokens - $needtoken->token;
 
