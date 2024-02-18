@@ -43,8 +43,9 @@ class DriverController extends Controller
             ->crossJoin('tj_vehicule')
             ->crossJoin('delivery_charges')
             // ->leftJoin('brands', 'brands.id', '=', 'tj_vehicule.brand')
-             ->leftJoin('cpv_requirement', 'cpv_requirement.driver_id', '=', 'tj_conducteur.id')
+            
             ->crossJoin('tj_conducteur')
+            ->leftJoin('cpv_requirement', 'cpv_requirement.driver_id', '=', 'tj_conducteur.id')
             ->leftJoin('remaining_tokens', 'remaining_tokens.user_id', '=', 'tj_conducteur.id')
             ->select('tj_conducteur.id', 'tj_conducteur.nom', 'tj_conducteur.wheel_chair', 'tj_type_vehicule.libelle', 'tj_type_vehicule.status', 'tj_type_vehicule.currency',
                 'tj_type_vehicule.prix', 'tj_conducteur.prenom', 'tj_conducteur.phone', 'tj_conducteur.email',
