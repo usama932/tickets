@@ -170,7 +170,7 @@ class UserController extends Controller
             } else {
 
                 $insertdata = DB::insert("insert into tj_conducteur(online,prenom,nom,phone,mdp,statut,login_type,tonotify,creer,updated_at,status_car_image,statut_vehicule,email,wheel_chair,address)
-                values('yes','" . $prenom . "','" . $nom . "','" . $phone . "','" . $mdp . "','no','" . $login_type . "','" . $tonotify . "','" . $date_heure . "','" . $date_heure . "','no','no','" . $email . "', '" . $wheel_chair . "','')");
+                values('yes','" . $prenom . "','" . $nom . "','" . $phone . "','" . $mdp . "','yes','" . $login_type . "','" . $tonotify . "','" . $date_heure . "','" . $date_heure . "','no','no','" . $email . "', '" . $wheel_chair . "','')");
                 $id = DB::getPdo()->lastInsertId();
                 //$id = mysqli_insert_id($con);
                 if ($id > 0) {
