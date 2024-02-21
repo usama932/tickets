@@ -145,7 +145,6 @@
                                         <th>{{trans('lang.user_phone')}}</th>
                                         <th>{{trans('lang.vehicle_type')}}</th>
                                         <th>{{trans('lang.total_ride')}}</th>
-                                        <th>{{trans('lang.wallet_history')}}</th>
                                         <th>{{trans('lang.status')}}</th>
                                         <th>{{trans('lang.actions')}}</th>
                                     </tr>
@@ -200,9 +199,7 @@
                                                     @endforeach
                                                     <a href="{{route('rides.all',['id'=>$driver->id])}}"><?php echo $count; ?></a>
                                                 </td>
-                                                <td>
-                                                    <a href="{{route('payoutRequests.view',['id'=>$driver->id])}}">{{trans("lang.wallet_history")}}</a>
-                                                </td>
+                                               
 
                                                 <td>@if ($driver->statut=="yes")
                                                         <label class="switch"><input type="checkbox" checked

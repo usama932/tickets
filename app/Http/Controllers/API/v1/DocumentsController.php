@@ -316,26 +316,75 @@ class DocumentsController extends Controller
     }
 
     public function getcpvRequirement( $driver_id){
-        $cpvs = CpvRequirement::where('driver_id',$driver_id)->
+        $driver = Driver::where('id',$driver_id)->first();
+        if(!empty($driver)){
+            $cpvs = CpvRequirement::where('driver_id',$driver_id)->
                                 where('driver_fatigue','1')-> where('maintaing_vehicle','1')-> where('emergency_management','1')
                                 ->where('driver_behave','1')->where('medical_fitness','1')->where('covid_19','1')
                                 ->where('notifiable_incidents','1')-> where('notifiable_incidents','1')->where('notifiable_incidents','1')
                                 ->where('updated_at', '>', Carbon::now()->subMonths(6))
                                 ->first();
-                            
-        if(!empty($cpv)){
-            $response['success'] = 'success';
-            $response['error'] = null;
-            $response['message'] = 'successfully';
-            $response['cpvs'] = 'false';
-            return response()->json($response);
+    
+            $to = $driver->email;
+            $adto = 'info@callataxi.au';
+            $subject = "CPV Requirement Update";
+            $message = '
+                        <body style="margin:100px; background: #f8f8f8; ">
+                            <div width="100%" style="background: #f8f8f8; padding: 0px 0px; font-family:arial; line-height:28px; height:100%;  width: 100%; color: #514d6a;">
+                                <div style="max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px; background: #fff;">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px">
+                                        <tbody>
+                                            <tr>
+                                                <td style="vertical-align: top; padding-bottom:30px;" align="center">
+                                                    <img src="http://projets.hevenbf.com/yellow%20taxi/webservices/images/logo_taxijaune.jpg" alt="logo Spark" style="border:none" width="15%">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div style="padding: 40px; background: #fff;">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                                            <tbody>
+                                                <tr>
+                                                 
+                                                    <h3>CPV Requirement Update </h3>
+                                                    <p> Mr./Mrs '.$driver->nom.' '.$driver->prenom.'</p>
+                                                    <b><u>Details of CPV:</u></b><br>
+                                                  
+                                                  
+                                                    <br/>
+                                                    <p>Good continuation and see you soon !</p>
+                                                    <p>Regards </p>
+                                                    <p>Hail A Taxi </p>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </body>
+                        ';
+            
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\b";
+            $headers .= 'From: Taxi Jaune' . "\r\n";
+            mail($to,$subject,$message,$headers);     
+            mail($adto,$subject,$message,$headers);              
+            
+            if(!empty($cpv)){
+                $response['success'] = 'success';
+                $response['error'] = null;
+                $response['message'] = 'successfully';
+                $response['cpvs'] = 'false';
+                return response()->json($response);
+            }
+            else{
+                $response['success'] = 'success';
+                $response['error'] = null;
+                $response['message'] = 'successfully';
+                $response['cpvs'] = 'true';
+                return response()->json($response);
+            }
         }
-        else{
-            $response['success'] = 'success';
-            $response['error'] = null;
-            $response['message'] = 'successfully';
-            $response['cpvs'] = 'true';
-            return response()->json($response);
-        }
+        
     }
 }
