@@ -153,7 +153,7 @@ class GetProfileByPhoneController extends Controller
 
         if (!empty($checkuser)) {
 
-			$checkaccount = Driver::where('phone', $phone)->where('statut', 'yes')->first();
+			$checkaccount = Driver::where('phone', $phone)->first();
 
 			if (!empty($checkaccount)){
 
@@ -164,17 +164,17 @@ class GetProfileByPhoneController extends Controller
             	$row['user_cat'] = "driver";
             	$id_user = $row['id'];
 
-           		$get_currency = DB::table('tj_currency')->select('*')->where('statut','=','yes')->get();
+           		$get_currency = DB::table('tj_currency')->select('*')->get();
                 foreach ($get_currency as $row_currency){
                     $row['currency'] = $row_currency->symbole;
                 }
 
-                $get_country = DB::table('tj_country')->select('*')->where('statut','=','yes')->get();
+                $get_country = DB::table('tj_country')->select('*')->get();
                 foreach ($get_country as $row_country){
                     $row['country'] = $row_country->code;
                 }
 
-                $get_vehicle = DB::table('tj_vehicule')->select('*')->where('statut','=','yes')->where('id_conducteur','=',DB::raw($id_user))->get();
+                $get_vehicle = DB::table('tj_vehicule')->select('*')->where('id_conducteur','=',DB::raw($id_user))->get();
                 foreach ($get_vehicle as $row_vehicle){
                     $row['brand'] = $row_vehicle->brand;
                     $row['model'] = $row_vehicle->model;
