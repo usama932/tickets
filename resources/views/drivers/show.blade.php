@@ -398,7 +398,7 @@
 											</h5>
 											<p>To prevent the spread of coronavirus we ask that you please wipe down the touch points and disinfect your vehicle at the start of every shift. If you have cold and flu symptoms but are well enough to drive, please wear a mask as a precaution. If you test positive to COVID19 we ask that you do not drive for 3 days or while you have symptoms. We recommend that you also have masks and hand sanitizer available to provide to passengers in the event you become aware they are positive for coronavirus.</p>
 											<h5>Notifiable Incidents
-												<i class="fa fa-check" style="font-size:36px;color:green"></i>
+												
 												@if(!empty($cpvs))
 													@if($cpvs->driver_fatigue == 1)
 													<i class="fa fa-check" style="font-size:36px;color:green"></i>
@@ -409,7 +409,7 @@
 											</h5>
 											<p>As a driver you are a duty holder under the CPV regulations, which means you have a legal obligation to report notifiable incidents and you must notify CPV within ten business days of becoming aware an incident has occurred. You can do so using the Notifiable Incidents Portal. It is an offence not to report a notifiable incident. The failure to do so may result in compliance action by Safe Transport Victoria</p>
 											<h5>Reporting Hazards
-												<i class="fa fa-close" style="font-size:36px;color:red"></i>
+											
 												@if(!empty($cpvs))
 													@if($cpvs->driver_fatigue == 1)
 													<i class="fa fa-check" style="font-size:36px;color:green"></i>
