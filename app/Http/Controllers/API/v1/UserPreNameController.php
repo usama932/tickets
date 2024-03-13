@@ -17,7 +17,7 @@ class UserPreNameController extends Controller
   {
 
         $id_user = $request->get('id_user');
-        $prenom = $request->get('nom');
+        $nom = $request->get('prenom');
         $prenom = str_replace("'","\'",$nom);
         $user_cat = $request->get('user_cat');
         $date_heure = date('Y-m-d H:i:s');
