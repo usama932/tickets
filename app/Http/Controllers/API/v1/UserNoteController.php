@@ -36,7 +36,7 @@ class UserNoteController extends Controller
       $passenger_clean = $request->get('passenger_clean');
       $find_passenger = $request->get('find_passenger');
       $drop_passenger = $request->get('drop_passenger');
-      $comment = $request->get('comment');
+      $comment = $request->get('comment') ?? '';
       $ride_id = $request->get('ride_id');
       $date_heure = date('Y-m-d H:i:s');
       $response = [];

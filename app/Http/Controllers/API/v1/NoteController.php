@@ -35,7 +35,7 @@ class NoteController extends Controller
         $car_condition = $request->get('car_condition');
         $driver_comfort = $request->get('driver_comfort');
         $no_jugment = $request->get('no_jugment');
-        $comment = $request->get('comment');
+        $comment = $request->get('comment') ?? '';
         $ride_id = $request->get('ride_id');
         $date_heure = date('Y-m-d H:i:s');
 
