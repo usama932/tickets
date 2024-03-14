@@ -41,7 +41,7 @@ class UserNoteController extends Controller
       $date_heure = date('Y-m-d H:i:s');
       $response = [];
 
-      if ($id_user_app && $id_conducteur && $note_value && $comment) {
+      if ($id_user_app && $id_conducteur && $note_value ) {
 
           $chknote = DB::table('tj_user_note')
               ->select('id')

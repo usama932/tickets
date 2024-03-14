@@ -39,7 +39,7 @@ class NoteController extends Controller
         $ride_id = $request->get('ride_id');
         $date_heure = date('Y-m-d H:i:s');
 
-        if($id_user_app && $id_conducteur && $note_value && $comment ){
+        if($id_user_app && $id_conducteur && $note_value  ){
         //$chknote = Note::where('id_user_app',$id_user_app AND 'id_conducteur',$id_conducteur)->first();
         $chknote = DB::table('tj_note')
         ->select('id')
