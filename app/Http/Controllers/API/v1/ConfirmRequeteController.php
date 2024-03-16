@@ -202,7 +202,14 @@ class ConfirmRequeteController extends Controller
             $mytime = Carbon::now();
             $time = $mytime->toDateString(); // Get only the date part
             
-          
+            $drivertime = DriverTime::where('driver_id', $from_id)->whereDate('start_time', $time)->first();
+            if(empty($drivertime)){
+                DriverTime::create([
+                    'driver_id' => $from_id,
+                    'start_time' =>  $time,
+                    
+                ]);
+            }
             $response['success'] = 'success';
             $response['error'] = null;
             $response['message'] = 'status successfully updated';
