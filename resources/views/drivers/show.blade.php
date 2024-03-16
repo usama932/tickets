@@ -325,7 +325,8 @@
 
 								<div role="tabpanel" class="tab-pane {{ Request::get('tab') == 'security' ? 'active' : ''}}" id="security">
 									<div class="card">
-										<h6 class="card-header">DRIVER INDUCTION TRAINING & ACKNOWLEDGEMENT</h6>
+										<h6 class="card-header">DRIVER INDUCTION TRAINING & ACKNOWLEDGEMENT  </h6>
+										<h6 class="justify-content-end d-flex m-3"><a href="{{route('driver_send_cpvemail',$driver->id)}}"  class="btn btn-primary btn-sm">Resend Email</a></h6>
 										<div class="card-body">
 											<h5>Driver Fatigue
 												@if(!empty($cpvs))

@@ -71,6 +71,7 @@ Route::get('/driver/show/{id}', [App\Http\Controllers\DriverController::class, '
 Route::get('/driver/changeStatus/{id}', [App\Http\Controllers\DriverController::class, 'changeStatus'])->name('driver.changeStatus');
 Route::get('/driver/changeStatus/{id}', [App\Http\Controllers\DriverController::class, 'changeStatus'])->name('driver.changeStatus');
 Route::get('/driver/document/view/{id}', [App\Http\Controllers\DriverController::class, 'documentView'])->name('driver.documentView');
+Route::get('/driver/cpv_email/{id}', [App\Http\Controllers\DriverDocumentController::class, 'getcpvemail'])->name('driver_send_cpvemail');
 Route::get('/driver/uploaddocument/{id}/{doc_id}', [App\Http\Controllers\DriverController::class, 'uploaddocument'])->name('driver.uploaddocument');
 Route::get('/driver/upload/document/{id}', [App\Http\Controllers\DriverController::class, 'uploaddocument'])->name('driver.upload_document');
 Route::put('/driver/updatedocument/{id}', [App\Http\Controllers\DriverController::class, 'updatedocument'])->name('driver.updatedocument');
