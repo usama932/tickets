@@ -91,7 +91,8 @@ class VehicleController extends Controller
             'flag_day_rate'=>'required',
             'flag_overnight_rate'=>'required',
             'flag_peak_rate'=>'required',
-
+            'high_occupency'=>'required',
+            'lifting_fee'=>'required',
         ], $messages = [
             'libelle.required' => 'The Vehicle Type field is required!',
             'image.required' => 'The Image field is required!',
@@ -101,6 +102,9 @@ class VehicleController extends Controller
             'flag_day_rate.required'=>'Flag Day Rate is required!',
             'flag_overnight_rate.required' => 'Flag Overnight Rate is required!',
             'flag_peak_rate.required'=>'Flag PEak Rate is required!',
+            'high_occupency.required'=>'high_occupency is required!',
+            'lifting_fee.required'=>'lifting_fee is required!',
+
 
         ]);
         if ($validator->fails()) {
@@ -133,6 +137,9 @@ class VehicleController extends Controller
         $flag_overnight_rate = $request->input('flag_overnight_rate');
         $flag_peak_rate = $request->input('flag_peak_rate');
 
+        $lifting_fee = $request->input('lifting_fee');
+        $high_occupency = $request->input('high_occupency');
+        $delivery = DeliveryCharges::where('id_vehicle_type', $id)->first();
 
         $delivery = new DeliveryCharges;
         $delivery->day_charges_per_km = $request->input('day_charges_per_km');
@@ -142,6 +149,10 @@ class VehicleController extends Controller
         $delivery->flag_overnight_rate = $flag_overnight_rate;
         $delivery->flag_peak_rate = $flag_peak_rate;
         $delivery->id_vehicle_type = $vedicleType_id;
+        $delivery->high_occupency = $high_occupency;
+        
+        $delivery->lifting_fee = $lifting_fee;
+
         $delivery->created = date('Y-m-d H:i:s');
         $delivery->modifier = date('Y-m-d H:i:s');
         $delivery->save();
@@ -181,6 +192,8 @@ class VehicleController extends Controller
             'flag_day_rate'=>'required',
             'flag_overnight_rate'=>'required',
             'flag_peak_rate'=>'required',
+            'high_occupency'=>'required',
+            'lifting_fee'=>'required',
 
         ], $messages = [
             'libelle.required' => 'The Vehicle Type field is required!',
@@ -190,7 +203,8 @@ class VehicleController extends Controller
             'flag_day_rate.required'=>'Flag Day Rate is required!',
             'flag_overnight_rate.required' => 'Flag Overnight Rate is required!',
             'flag_peak_rate.required'=>'Flag PEak Rate is required!',
-
+            'high_occupency.required'=>'high_occupency is required!',
+            'lifting_fee.required'=>'lifting_fee is required!',
 
         ]);
         if ($validator->fails()) {
@@ -237,6 +251,8 @@ class VehicleController extends Controller
             $flag_day_rate = $request->input('flag_day_rate');
             $flag_overnight_rate = $request->input('flag_overnight_rate');
             $flag_peak_rate = $request->input('flag_peak_rate');
+            $high_occupency = $request->input('high_occupency');
+            $lifting_fee = $request->input('lifting_fee');
             $delivery = DeliveryCharges::where('id_vehicle_type', $id)->first();
             if ($delivery) {
                 $delivery->day_charges_per_km = $day_charges_per_km;
@@ -245,6 +261,10 @@ class VehicleController extends Controller
                 $delivery->flag_day_rate = $flag_day_rate;
                 $delivery->flag_overnight_rate = $flag_overnight_rate;
                 $delivery->flag_peak_rate = $flag_peak_rate;
+
+                $delivery->high_occupency = $high_occupency;
+
+                $delivery->lifting_fee = $lifting_fee;
 
                 $delivery->modifier = date('Y-m-d H:i:s');
 
@@ -256,6 +276,8 @@ class VehicleController extends Controller
                 $delivery->flag_day_rate = $flag_day_rate;
                 $delivery->flag_overnight_rate = $flag_overnight_rate;
                 $delivery->flag_peak_rate = $flag_peak_rate;
+                $delivery->high_occupency = $high_occupency;
+                $delivery->lifting_fee = $lifting_fee;
                 $delivery->id_vehicle_type = $id;
                 $delivery->created = date('Y-m-d H:i:s');
                 $delivery->modifier = date('Y-m-d H:i:s');

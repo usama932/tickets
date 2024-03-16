@@ -139,7 +139,24 @@
                                                     <!-- <div class="form-text text-muted"></div> -->
                                                 </div>
                                             </div>
-
+                                            <div class="form-group row width-100">
+                                                <label class="col-3 control-label">High Occupency</label>
+                                                <div class="col-7">
+                                                    <input type="text" class="form-control"
+                                                           name="high_occupency"
+                                                           value="{{ Request::old('high_occupency') }}">
+                                                    <!-- <div class="form-text text-muted"></div> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-group row width-100">
+                                                <label class="col-3 control-label">Lifting Fee </label>
+                                                <div class="col-7">
+                                                    <input type="text" class="form-control"
+                                                           name="lifting_fee"
+                                                           value="{{ Request::old('lifting_fee') }}">
+                                                    <!-- <div class="form-text text-muted"></div> -->
+                                                </div>
+                                            </div>
                                         </fieldset>
                                     </div>
                                 </div>
