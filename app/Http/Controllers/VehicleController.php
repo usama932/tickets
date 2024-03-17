@@ -139,7 +139,7 @@ class VehicleController extends Controller
 
         $lifting_fee = $request->input('lifting_fee');
         $high_occupency = $request->input('high_occupency');
-        $delivery = DeliveryCharges::where('id_vehicle_type', $id)->first();
+       
 
         $delivery = new DeliveryCharges;
         $delivery->day_charges_per_km = $request->input('day_charges_per_km');
