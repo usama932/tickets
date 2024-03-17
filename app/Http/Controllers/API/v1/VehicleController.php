@@ -426,6 +426,8 @@ class VehicleController extends Controller
                 $row->flag_day_rate = $row_delivery_chagres->flag_day_rate;
                 $row->flag_overnight_rate = $row_delivery_chagres->flag_overnight_rate;
                 $row->flag_peak_rate = $row_delivery_chagres->flag_peak_rate;
+                $row->high_occupency = $row_delivery_chagres->high_occupency;
+                $row->lifting_fee = $row_delivery_chagres->lifting_fee;
             }
 
             $output[] = $row;
