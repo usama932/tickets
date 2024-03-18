@@ -180,8 +180,8 @@ class GetProfileByPhoneController extends Controller
                 $drivertime = DriverTime::where('driver_id', $checkaccount->id)->first();
                 
                 if(!empty($drivertime)){
-                    $startDateTime = $drivertime->start_time;
-                    $difference = $startDateTime->diff($time);
+                    $startDateTime = new Carbon($drivertime->start_time);
+                    $difference = $startDateTime->diff($mytime);
                 
                     $totalHours = $difference->days * 24 + $difference->h; 
                 
