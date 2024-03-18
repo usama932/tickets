@@ -178,28 +178,36 @@ class GetProfileByPhoneController extends Controller
                 $mytime = Carbon::now();
                 $time = $mytime->toDateString(); 
                 $drivertime = DriverTime::where('driver_id', $checkaccount->id)->first();
-                $startDateTime = $drivertime->start_time;
-
-               
-                $difference = $startDateTime->diff($time);
-               
-                $totalHours = $difference->days * 24 + $difference->h; 
-               
-                if($totalHours >= 14){
-                    if(empty($drivertime)){
-                        DriverTime::create([
-                            'driver_id' => $checkaccount->id,
-                            'start_time' =>  $time,
-                            
-                        ]);
-                    }else{
-                        DriverTime::where('id', $checkaccount->id)->update([
-                            'driver_id' => $checkaccount->id,
-                            'start_time' =>  $time,
-                            
-                        ]);
+                
+                if(!empty($drivertime)){
+                    $startDateTime = $drivertime->start_time;
+                    $difference = $startDateTime->diff($time);
+                
+                    $totalHours = $difference->days * 24 + $difference->h; 
+                
+                    if($totalHours >= 14){
+                        if(empty($drivertime)){
+                            DriverTime::create([
+                                'driver_id' => $checkaccount->id,
+                                'start_time' =>  $time,
+                                
+                            ]);
+                        }else{
+                            DriverTime::where('id', $checkaccount->id)->update([
+                                'driver_id' => $checkaccount->id,
+                                'start_time' =>  $time,
+                                
+                            ]);
+                        }
+                    
                     }
-                 
+                }
+                else{
+                    DriverTime::create([
+                        'driver_id' => $checkaccount->id,
+                        'start_time' =>  $time,
+                        
+                    ]);
                 }
                 $get_vehicle = DB::table('tj_vehicule')->select('*')->where('id_conducteur','=',DB::raw($id_user))->get();
                 foreach ($get_vehicle as $row_vehicle){
