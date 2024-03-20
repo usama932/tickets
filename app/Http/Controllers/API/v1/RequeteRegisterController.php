@@ -126,7 +126,7 @@ class RequeteRegisterController extends Controller
                     ->where('tj_requete.id_user_app','=',DB::raw('tj_user_app.id'))
                     ->where('tj_requete.id','=',DB::raw($id))
                     ->first();
-                dd($data);
+              
                 GcmController::send_notification($tokens,$message,$data,'ride');
             }
             if ($id > 0) {
