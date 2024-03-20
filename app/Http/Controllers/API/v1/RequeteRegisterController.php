@@ -111,7 +111,7 @@ class RequeteRegisterController extends Controller
             $insertdata = DB::insert("insert into tj_requete(date_retour,statut_round,heure_retour,number_poeple,place,id_payment_method,trajet,depart_name,destination_name,id_conducteur,id_user_app,latitude_depart,longitude_depart,latitude_arrivee,longitude_arrivee,statut,creer,distance,distance_unit,montant,duree,trip_objective,age_children1,age_children2,age_children3,feel_safe,tip_amount,statut_paiement,modifier,statut_course,id_conducteur_accepter,trip_category,feel_safe_driver)
              values('" . $date_retour . "','" . $statut_round . "','" . $heure_retour . "','" . $number_poeple . "','" . $place . "','" . $id_payment . "','" . $filename . "','" . $depart_name . "','" . $destination_name . "','" . $id_conducteur . "','" . $user_id . "','" . $lat1 . "','" . $lng1 . "','" . $lat2 . "','" . $lng2 . "','new','" . $date_heure . "','" . $distance . "', '".$distance_unit."', '" . $cout . "','" . $duree . "','" . $trip_objective . "','" . $age_children1 . "','" . $age_children2 . "','" . $age_children3 . "',0,0,'','" . $date_heure . "','',0,'',0)");
             $id = DB::getPdo()->lastInsertId();
-
+dd($id);
             if(count($tokens) > 0)
             {
                 $data = DB::table('tj_requete')
