@@ -780,6 +780,7 @@ class DriverController extends Controller
 
     public function documentView($id)
     {
+        
 		$driver = Driver::where('id', "=", $id)->first();
 
 		$admin_documents = DB::table('admin_documents')->where('admin_documents.is_enabled','Yes')->get();
@@ -798,7 +799,8 @@ class DriverController extends Controller
       public function uploaddocument($id,$doc_id)
       {
           $document=DB::table('admin_documents')->where('is_enabled','=','Yes')->get();
-          return view('drivers.uploaddocument')->with('id', $id)->with('document_id',$doc_id)->with('document',$document);
+          $dr_document = DB::table('driver_document')->where('driver_id',$id)->first();
+          return view('drivers.uploaddocument')->with('id', $id)->with('document_id',$doc_id)->with('document',$document)->with('dr_document',$dr_document);
       }
 
 
@@ -807,9 +809,11 @@ class DriverController extends Controller
 
         $validator = Validator::make($request->all(), $rules = [
             'document_path' => "required",
+            '' => "required",
 
         ], $messages = [
             'document_path.required' => 'The docuemnt field is required!',
+            'document_expiry.required' => 'Expiry Date Required'
 
         ]);
 
@@ -846,6 +850,8 @@ class DriverController extends Controller
 
                 $driver->document_path = $filename;
 
+                $driver->document_expiry = $request->document_expiry;
+
                 $driver->document_status = 'Pending';
             }
 
@@ -868,6 +874,7 @@ class DriverController extends Controller
               $driver->document_path = $filename;
 
               $driver->document_status = 'Pending';
+              $driver->document_expiry = $request->document_expiry;
           }
 
           $driver->driver_id = $id;

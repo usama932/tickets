@@ -89,7 +89,7 @@
 	                                                            @if($document->driver_document)
 	                                                            <td>
 	    	                                                    	<a href="#" data-toggle="modal" data-target="#exampleModal_{{$document->id}}" class="open-image" title="View Document"><i class="imageresource fas fa fa-file-image-o"></i></a>
-																	<a class="" href="{{ asset('assets/images/driver/documents',['id' => $document->driver_document?$document->driver_document->driver_id:$driver->id,'document_id'=>$document->id]) }}"><i class="fa fa-edit"></i></a>
+																	<a class="" href="{{ route('driver.uploaddocument', ['id' => $document->driver_document->driver_id, 'doc_id' => $document->id]) }}"><i class="fa fa-edit"></i></a>
 
 																	<div class="modal fade" id="exampleModal_{{$document->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				                                                        <div class="modal-dialog" role="document" style="max-width: 50%;">
@@ -126,17 +126,17 @@
 
 																</td>
 
-																<td>
-	                                                				<a href="{{ route('drivers.documentstatus',['id' => $document->driver_document->id,'type'=>1]) }}" class="btn btn-sm btn-success">Approve</a>
-	                                                				&nbsp;&nbsp;
-	                                                				<a href="{{ route('drivers.documentstatus',['id' => $document->driver_document->id,'type'=>0]) }}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#commentModal" data-docid="{{$document->driver_document->id}}">Disapprove</a>
-	                                                			</td>
+																
 
 	                                                           @else
 	                                                                <td><a href="{{ url('driver/uploaddocument',['id' => $document->driver_document?$document->driver_document->driver_id:$driver->id,'document_id'=>$document->id]) }}" class="fas fa fa-upload"></a></td>
 	                                                                <td></td>
 	                                                            @endif
-
+																<td>
+	                                                				<a href="{{ route('drivers.documentstatus',['id' => $document->driver_document->id,'type'=>1]) }}" class="btn btn-sm btn-success">Approve</a>
+	                                                				&nbsp;&nbsp;
+	                                                				<a href="{{ route('drivers.documentstatus',['id' => $document->driver_document->id,'type'=>0]) }}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#commentModal" data-docid="{{$document->driver_document->id}}">Disapprove</a>
+	                                                			</td>
 	                                                        </tr>
 
 														@endforeach

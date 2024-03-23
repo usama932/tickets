@@ -37,6 +37,8 @@
                                     </ul>
                                 </div>
                             @endif
+                                
+
                             <form action="{{route('driver.updatedocument',['id' => $id])}}" method="post"
                                   enctype="multipart/form-data" id="create_driver">
                                 @csrf
@@ -44,6 +46,7 @@
                                 <div class="row restaurant_payout_create">
                                     <div class="restaurant_payout_create-inner">
                                         <fieldset>
+                                            
                                             <legend>{{trans('lang.document_details')}}</legend>
                                             <div class="form-group row width-50">
                                                 <label class="col-3 control-label">{{trans('lang.category_name')}}</label>
@@ -57,14 +60,54 @@
                                                     <input type="hidden" name="document_id" value="{{$document_id}}">
                                                 </div>
                                             </div>
+                                            <div class="form-group row width-50">
+                                                <label class="col-3 control-label">Expiry Date</label>
 
+                                            <div class="col-12">
+                                                <input type="date" name="document_expiry" class="form-control" >
+                                              
+                                            </div>
+
+                                        </div>
 
                                             <div class="form-group row width-50">
                                                     <label class="col-3 control-label">{{trans('lang.upload_doc')}}</label>
 
-                                                <div class="col-7">
+                                                <div class="col-12">
                                                     <input type="file" class="" name="document_path" >
-
+                                                    <a href="#" data-toggle="modal" data-target="#exampleModal_{{$dr_document->id}}" class="open-image" title="View Document"><i class="imageresource fas fa fa-file-image-o"></i>View</a>
+                                                    <div class="modal fade" id="exampleModal_{{$dr_document->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document" style="max-width: 50%;">
+                                                            <div class="modal-content">
+                        
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                        
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <embed
+                                                                            src="{{asset('assets/images/driver/documents').'/'.$dr_document->document_path}}"
+                                                                            frameBorder="0"
+                                                                            scrolling="auto"
+                                                                            height="100%"
+                                                                            width="100%"
+                                                                            style="height: 540px;"
+                                                                        ></embed>
+                                                                    </div>
+                        
+                                                                    <div class="modal-footer">
+                                                                        <a class="btn btn-primary" href="{{asset('assets/images/driver/documents').'/'.$dr_document->document_path}}">Download</a>
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('lang.close')}}</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
