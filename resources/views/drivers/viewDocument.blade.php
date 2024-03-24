@@ -73,6 +73,7 @@
 	                                                        <th>{{trans('lang.document_name')}}</th>
 	                                                        <th>{{trans('lang.status')}}</th>
 	                                                        <th>{{trans('lang.comment')}}</th>
+															<th>Document Expiry Date</th>
 	                                                        <th>{{trans('lang.action')}}</th>
 	                                                        <th>{{trans('lang.action')}}</th>
 	                                                    </tr>
@@ -85,7 +86,7 @@
 	                                                            <td>{{$document->title}}</td>
 	                                                            <td>{{$document->driver_document?$document->driver_document->document_status:'Not Uploaded'}}</td>
 	                                                            <td>{{$document->driver_document?$document->driver_document->comment:''}}</td>
-
+																<td>{{$document->driver_document?$document->driver_document->document_expiry:''}}</td>
 	                                                            @if($document->driver_document)
 	                                                            <td>
 	    	                                                    	<a href="#" data-toggle="modal" data-target="#exampleModal_{{$document->id}}" class="open-image" title="View Document"><i class="imageresource fas fa fa-file-image-o"></i></a>

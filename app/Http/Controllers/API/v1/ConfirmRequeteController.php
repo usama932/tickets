@@ -24,7 +24,7 @@ class ConfirmRequeteController extends Controller
         $mytime = Carbon::now();
         $time = $mytime->toDateTimeString();
         $time = Carbon::parse($time);
-        $drivertime = DriverTime::where('driver_id',$driver_id)->whereDate('start_time', $time )->whereDate('end_time', $time )->first();
+        $drivertime = DriverTime::where('driver_id',$driver_id)->first();
         if(!empty($drivertime)){
             $response['success'] = 'success';
             $response['error'] = null;
