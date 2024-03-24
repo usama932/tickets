@@ -33,42 +33,59 @@ class ChangeStatusController extends Controller
               ->where('driver_id', $id_conducteur)->first();
               if($get_driver_document){
                 if($online == 'yes'){
-                  $mytime = Carbon::now();
-                  $time = $mytime->toDateString(); 
-                  $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
-                  
-                  if(!empty($drivertime)){
-                      $startDateTime = new Carbon($drivertime->start_time);
-                      $difference = $startDateTime->diff($mytime);
-                  
-                      $totalHours = $difference->days * 24 + $difference->h; 
-                  
-                      if($totalHours >= 14){
-                          if(empty($drivertime)){
-                              DriverTime::create([
-                                  'driver_id' => $id_conducteur,
-                                  'start_time' =>  $time,
-                                  
-                              ]);
-                          }else{
-                              DriverTime::where('id', $id_conducteur)->update([
-                                  'driver_id' => $id_conducteur,
-                                  'start_time' =>  $time,
-                                  
-                              ]);
-                          }
-                      
-                      }
-                  }
-                  else{
-                      DriverTime::create([
-                          'driver_id' => $checkaccount->id,
-                          'start_time' =>  $time,
-                          
-                      ]);
-                  }
+                    $mytime = Carbon::now();
+                    $time = $mytime->toDateString(); 
+                    $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
+                    
+                    if(!empty($drivertime)){
+                        if(empty($drivertime)){
+                            DriverTime::create([
+                                'driver_id' => $id_conducteur,
+                                'start_time' =>  $time,
+                                
+                            ]);
+                        }else{
+                            DriverTime::where('id', $id_conducteur)->update([
+                                'driver_id' => $id_conducteur,
+                                'start_time' =>  $time,
+                                
+                            ]);
+                        }
+                        
+                        
+                    }
+                    else{
+                        DriverTime::create([
+                            'driver_id' => $id_conducteur,
+                            'start_time' =>  $time,
+                            
+                        ]);
+                    }
                 }else{
-
+                    
+                    $mytime = Carbon::now();
+                    $time = $mytime->toDateString(); 
+                    $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
+                    
+                    if(!empty($drivertime)){
+                        if(empty($drivertime)){
+                            DriverTime::create([
+                                'driver_id' => $id_conducteur,
+                                'end_time' =>  $time,
+                            ]);
+                        }else{
+                            DriverTime::where('id', $id_conducteur)->update([
+                                'driver_id' => $id_conducteur,
+                                'end_time' =>  $time,
+                            ]);
+                        }
+                    }
+                    else{
+                        DriverTime::create([
+                            'driver_id' => $id_conducteur,
+                            'end_time' =>  $time,   
+                        ]);
+                    }
                 }
                 $updatedata =  DB::update('update tj_conducteur set online = ? where id = ?', [$online, $id_conducteur]);
                 if (!empty($updatedata)) {
