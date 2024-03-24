@@ -15,11 +15,7 @@ use Carbon\Carbon;
 class DocumentsController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->limit = 20;
-    }
-
+   
     public function getData(Request $request)
     {
 

@@ -157,7 +157,7 @@ class DriverController extends Controller
         }
 
 		$admin_documents = DB::table('admin_documents')->where('admin_documents.is_enabled','Yes')->count();
-		$approved_documents = DriversDocuments::where('driver_id',$document->driver_id)->where('document_status','Approved')->count();
+		$approved_documents = DriversDocuments::where('driver_id',$document->driver_id)->whereDate('document_expiry', '>', now())->where('document_status','Approved')->count();
 
 		$driver = Driver::find($document->driver_id);
 		if($admin_documents == $approved_documents){
