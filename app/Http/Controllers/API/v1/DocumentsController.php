@@ -15,7 +15,11 @@ use Carbon\Carbon;
 class DocumentsController extends Controller
 {
 
-   
+    public function __construct()
+    {
+        $this->limit = 20;
+    }
+
     public function getData(Request $request)
     {
 
@@ -244,7 +248,7 @@ class DocumentsController extends Controller
 
             foreach ($admin_documents as $key=>$document) {
 
-				$get_driver_document = DB::table('driver_document')->where('document_id', $document->id)->where('driver_id', $driver_id)->first();
+				$get_driver_document = DB::table('driver_document')->where('document_id', $document->id)->where('driver_id', $driver_id)->whereDate('document_expiry', '>', Carbon::now())->first();
 
 				if($get_driver_document){
 					$document->document_path = url('assets/images/driver/documents/'.$get_driver_document->document_path);
