@@ -281,7 +281,7 @@ Route::post('v1/resert-password/', [ResertPasswordController::class, 'resertPass
 
     Route::post('v1/notify/', [NotifyController::class, 'UpdateNotify']);
     Route::post('v1/driver-confirm/', [CarDriverConfirmController::class, 'confirm']);
-    Route::post('v1/change-status/', [ChangeStatusControlller::class, 'changeStatus']);
+    Route::post('v1/change-status/', [ChangeStatusControlller::class,'changeStatus']);
     Route::post('v1/complete-requete/', [CompleteRequeteController::class, 'completeRequest']);
     Route::post('v1/confirm-requete/', [ConfirmRequeteController::class, 'confirmRequest']);
     Route::post('v1/contact-us/', [ContactUsController::class, 'contact']);

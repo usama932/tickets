@@ -10,7 +10,7 @@ use DB;
 use Carbon\Carbon;
 use App\Models\DriverTime;
 
-class ChangeStatusController extends Controller
+class ChangeStatusControlller extends Controller
 {
     public function __construct()
     {
