@@ -41,7 +41,7 @@ class ChangeStatusControlller extends Controller
                         if(empty($drivertime)){
                             DriverTime::create([
                                 'driver_id' => $id_conducteur,
-                                'start_time' =>  $time,
+                                'start_time' =>  $mytime,
                                 
                             ]);
                         }else{
@@ -57,7 +57,7 @@ class ChangeStatusControlller extends Controller
                     else{
                         DriverTime::create([
                             'driver_id' => $id_conducteur,
-                            'start_time' =>  $time,
+                            'start_time' =>  $mytime,
                             
                         ]);
                     }
@@ -71,7 +71,7 @@ class ChangeStatusControlller extends Controller
                         if(empty($drivertime)){
                             DriverTime::create([
                                 'driver_id' => $id_conducteur,
-                                'end_time' =>  $time,
+                                'end_time' =>  $mytime,
                             ]);
                         }else{
                             DriverTime::where('id', $id_conducteur)->update([
@@ -83,7 +83,7 @@ class ChangeStatusControlller extends Controller
                     else{
                         DriverTime::create([
                             'driver_id' => $id_conducteur,
-                            'end_time' =>  $time,   
+                            'end_time' =>  $mytime,   
                         ]);
                     }
                 }
