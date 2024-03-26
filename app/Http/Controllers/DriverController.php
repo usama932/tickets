@@ -797,22 +797,24 @@ class DriverController extends Controller
 
 
       public function uploaddocument($id,$doc_id)
-      {
+      { 
+       
           $document=DB::table('admin_documents')->where('is_enabled','=','Yes')->get();
           $dr_document = DB::table('driver_document')->where('driver_id',$id)->first();
-          return view('drivers.uploaddocument')->with('id', $id)->with('document_id',$doc_id)->with('document',$document)->with('dr_document',$dr_document);
+        $document_id = $doc_id;
+          return view('drivers.uploaddocument',compact('id','document_id','document','dr_document'));
       }
 
 
     public function updatedocument(Request $request, $id)
     {
-
+      
         $validator = Validator::make($request->all(), $rules = [
-            'document_path' => "required",
-            '' => "required",
+          
+            'document_expiry' => "required",
 
         ], $messages = [
-            'document_path.required' => 'The docuemnt field is required!',
+           
             'document_expiry.required' => 'Expiry Date Required'
 
         ]);
@@ -822,14 +824,13 @@ class DriverController extends Controller
                 ->withErrors($validator)->with(['message' => $messages])
                 ->withInput();
         }
-
         $document_id = $request->input('document_id');
 
 		$document_name = DB::table('admin_documents')->where('id', $document_id)->first();
         // print_r($document_id);
         // exit;
         $driver = DriversDocuments::where('driver_id', "=", $id)->where('document_id','=',$document_id)->first();
-
+      
         if ($driver) {
 
             if ($request->hasfile('document_path')) {
@@ -850,42 +851,40 @@ class DriverController extends Controller
 
                 $driver->document_path = $filename;
 
-                $driver->document_expiry = $request->document_expiry;
+              
 
                 $driver->document_status = 'Pending';
             }
-
+            $driver->document_expiry = $request->document_expiry;
             $driver->save();
 
         }else{
 
-          $driver = new DriversDocuments;
+            $driver = new DriversDocuments;
 
-          if ($request->hasfile('document_path')) {
+            if ($request->hasfile('document_path')) {
 
-              $file = $request->file('document_path');
+                $file = $request->file('document_path');
 
-              $extenstion = $file->getClientOriginalExtension();
+                $extenstion = $file->getClientOriginalExtension();
 
-              $filename = str_replace(' ','_',$document_name->title) . '_' . time() . '.' . $extenstion;
+                $filename = str_replace(' ','_',$document_name->title) . '_' . time() . '.' . $extenstion;
 
-              $file->move(public_path('assets/images/driver/documents/'), $filename);
+                $file->move(public_path('assets/images/driver/documents/'), $filename);
 
-              $driver->document_path = $filename;
+                $driver->document_path = $filename;
 
-              $driver->document_status = 'Pending';
-              $driver->document_expiry = $request->document_expiry;
-          }
+                $driver->document_status = 'Pending';
+            }
 
-          $driver->driver_id = $id;
+            $driver->driver_id = $id;
 
-          $driver->document_id = $request->input('document_id');
-
-          $driver->save();
+            $driver->document_id = $request->input('document_id');
+            $driver->document_expiry = $request->document_expiry;
+            $driver->save();
         }
 
 		return redirect()->route('driver.documentView',$id);
-        /*return redirect()->back();*/
     }
 
     public function toggalSwitch(Request $request)

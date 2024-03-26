@@ -13,14 +13,7 @@ class DriverDocument extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'admin_documents';
-    protected $fillable = [
-        'id',
-        'title',
-        'is_enabled',
-        'created_at',
-        'updated_at',
-
-    ];
+    protected $guarded = [];
 
  
 }
