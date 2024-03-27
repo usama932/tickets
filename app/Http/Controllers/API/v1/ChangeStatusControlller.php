@@ -22,18 +22,22 @@ class ChangeStatusControlller extends Controller
     {
         $id_conducteur = $request->get('id_driver');
         $online = $request->get('online');
-     
+        
         if (!empty($id_conducteur) && !empty($online)) {
+          
           $admin_documents = DB::table('admin_documents')->where('is_enabled','=','Yes')->get();
-         
+        
           if(!empty($admin_documents)){
-
+           
             foreach ($admin_documents as $document) {
+             
               $get_driver_document = DB::table('driver_document')->where('document_id', $document->id)
               ->where('driver_id', $id_conducteur)->first();
-          
-              if($get_driver_document){
+             
+              if(!empty($get_driver_document)){
+               
                 if($online == 'yes'){
+                    
                     $mytime = Carbon::now();
                     $time = $mytime->toDateString(); 
                     $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
@@ -88,8 +92,13 @@ class ChangeStatusControlller extends Controller
                         ]);
                     }
                 }
-                $updatedata =  DB::update('update tj_conducteur set online = ? where id = ?', [$online, $id_conducteur]);
-                if (!empty($updatedata)) {
+             
+                 $driver = Driver::where('id',$id_conducteur)->first();
+               
+                if (!empty($driver)) {
+                    $updatedata =  Driver::where('id',$id_conducteur)->update([
+                        'online' => $online
+                    ]);
                     $get_user = Driver::where('id', $id_conducteur)->first();
                     $row = $get_user->toArray();
 
