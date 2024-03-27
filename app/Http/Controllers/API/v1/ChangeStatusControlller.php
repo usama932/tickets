@@ -93,7 +93,7 @@ class ChangeStatusControlller extends Controller
                     }
                 }
              
-                 $driver = Driver::where('id',$id_conducteur)->first();
+                $driver = Driver::where('id',$id_conducteur)->first();
                
                 if (!empty($driver)) {
                     $updatedata =  Driver::where('id',$id_conducteur)->update([
@@ -168,11 +168,7 @@ class ChangeStatusControlller extends Controller
                     $response['error'] = 'Failed to change status';
                 }
               }
-              else{
-                $response['success'] = 'Failed';
-                $response['error'] = 'Driver Document has been Expired';
-        
-              }
+             
             }
           }
         } else {
