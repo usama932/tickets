@@ -28,7 +28,7 @@ class ChangeStatusControlller extends Controller
          
           if(!empty($admin_documents)){
 
-            foreach ($admin_documents as $key=>$document) {
+            foreach ($admin_documents as $document) {
               $get_driver_document = DB::table('driver_document')->where('document_id', $document->id)
               ->where('driver_id', $id_conducteur)->first();
               if($get_driver_document){
