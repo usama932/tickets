@@ -31,7 +31,7 @@ class ChangeStatusControlller extends Controller
             foreach ($admin_documents as $document) {
               $get_driver_document = DB::table('driver_document')->where('document_id', $document->id)
               ->where('driver_id', $id_conducteur)->first();
-             dd($document->id , $get_driver_document );
+          
               if($get_driver_document){
                 if($online == 'yes'){
                     $mytime = Carbon::now();
