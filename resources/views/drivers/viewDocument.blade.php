@@ -134,8 +134,10 @@
 	                                                                <td></td>
 	                                                            @endif
 																<td>
+																	@if(!empty($document->driver_document))
 	                                                				<a href="{{ route('drivers.documentstatus',['id' => $document->driver_document->id,'type'=>1]) }}" class="btn btn-sm btn-success">Approve</a>
 	                                                				&nbsp;&nbsp;
+																	@endif
 	                                                				<a href="{{ route('drivers.documentstatus',['id' => $document->driver_document->id,'type'=>0]) }}" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#commentModal" data-docid="{{$document->driver_document->id}}">Disapprove</a>
 	                                                			</td>
 	                                                        </tr>
