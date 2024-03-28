@@ -52,7 +52,7 @@ class ChangeStatusControlller extends Controller
                         }else{
                             DriverTime::where('id', $id_conducteur)->update([
                                 'driver_id' => $id_conducteur,
-                                'start_time' =>  $time,
+                                'start_time' => $mytime,
                                 
                             ]);
                         }
@@ -81,7 +81,7 @@ class ChangeStatusControlller extends Controller
                         }else{
                             DriverTime::where('id', $id_conducteur)->update([
                                 'driver_id' => $id_conducteur,
-                                'end_time' =>  $time,
+                                'end_time' =>  $mytime,
                             ]);
                         }
                     }
