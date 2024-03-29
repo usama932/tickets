@@ -246,7 +246,7 @@ class DocumentsController extends Controller
 
         if(!empty($admin_documents)){
 
-            foreach ($admin_documents as $document) {
+            foreach ($admin_documents as $key => $document) {
                
 				$get_driver_document = DriversDocuments::where('document_id', $document->id)->where('driver_id', $driver_id)->first();
                
