@@ -249,12 +249,13 @@ class DocumentsController extends Controller
             foreach ($admin_documents as $document) {
                
 				$get_driver_document = DriversDocuments::where('document_id', $document->id)->where('driver_id', $driver_id)->first();
-                dd($request->all());
+               
 				if($get_driver_document){
                     if($get_driver_document->document_expiry >= Carbon::now()->toDateString()) {
                         $get_driver_document->document_status = 'Disapprove';
                         $get_driver_document->save();
                     }
+                  
                     $document->document_path = url('assets/images/driver/documents/'.$get_driver_document->document_path);
                     $document->document_status = $get_driver_document->document_status;
                     $document->comment = $get_driver_document->comment;
