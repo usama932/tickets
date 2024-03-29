@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Driver;
 use App\Models\CpvRequirement;
+use App\Models\DriverDocument;
 use Carbon\Carbon;
 
 class DocumentsController extends Controller
@@ -246,28 +247,31 @@ class DocumentsController extends Controller
 
         if(!empty($admin_documents)){
 
-            foreach ($admin_documents as $key=>$document) {
-
-				$get_driver_document = DB::table('driver_document')->where('document_id', $document->id)->where('driver_id', $driver_id)->first();
-
-				if($get_driver_document){
+            foreach ($admin_documents as $key => $document) {
+                $get_driver_document = DriverDocument::where('document_id', $document->id)
+                                                     ->where('driver_id', $driver_id)
+                                                     ->first();
+            
+                if ($get_driver_document) {
                     if ($get_driver_document->document_expiry >= Carbon::now()->toDateString()) {
                         $get_driver_document->document_status = 'Disapprove';
                         $get_driver_document->save();
-                       
                     }
+            
                     $document->document_path = url('assets/images/driver/documents/'.$get_driver_document->document_path);
                     $document->document_status = $get_driver_document->document_status;
                     $document->comment = $get_driver_document->comment;
-				}else{
-					$document->document_path = '';
-					$document->document_status = 'Pending';
-					$document->comment = '';
-				}
-            	$document->document_name = $document->title;
-
-				$admin_documents[$key] = $document;
+                } else {
+                    $document->document_path = '';
+                    $document->document_status = 'Pending';
+                    $document->comment = '';
+                }
+            
+                $document->document_name = $document->title;
+            
+                $admin_documents[$key] = $document;
             }
+            
 
             $response['success'] = 'success';
             $response['error'] = null;

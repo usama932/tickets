@@ -12,12 +12,7 @@ use App\Models\DriverTime;
 
 class ChangeStatusControlller extends Controller
 {
-    public function __construct()
-    {
-        $this->limit = 20;
-    }
-
-
+   
     public function changeStatus(Request $request)
     {
         $id_conducteur = $request->get('id_driver');
