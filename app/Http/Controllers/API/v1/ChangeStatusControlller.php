@@ -15,9 +15,9 @@ class ChangeStatusControlller extends Controller
    
     public function changeStatus(Request $request)
     {
-        $id_conducteur = $request->get('id_driver');
-        $online = $request->get('online');
-        
+        $id_conducteur = $request->id_driver;
+        $online = $request->online;
+       
         if (!empty($id_conducteur) && !empty($online)) {
           
           $admin_documents = DB::table('admin_documents')->where('is_enabled','=','Yes')->get();
@@ -32,62 +32,48 @@ class ChangeStatusControlller extends Controller
               if(!empty($get_driver_document)){
                
                 if($online == 'yes'){
-                    
+                   
                     $mytime = Carbon::now();
-                    $time = $mytime->toDateString(); 
                     $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
-                    
-                    if(!empty($drivertime)){
-                        if(empty($drivertime)){
-                            DriverTime::create([
-                                'driver_id' => $id_conducteur,
-                                'start_time' =>  $mytime,
-                                
-                            ]);
-                        }else{
-                            DriverTime::where('id', $id_conducteur)->update([
-                                'driver_id' => $id_conducteur,
-                                'start_time' => $mytime,
-                                
-                            ]);
-                        }
-                        
-                        
-                    }
-                    else{
+
+                    if(empty($drivertime)){
                         DriverTime::create([
                             'driver_id' => $id_conducteur,
                             'start_time' =>  $mytime,
+                        ]);
+                    }else{
+                        DriverTime::where('driver_id', $id_conducteur)->update([
+                            'driver_id' => $id_conducteur,
+                            'start_time' => $mytime,
                             
                         ]);
                     }
-                }else{
+                  
+                }
+                else{
                     
                     $mytime = Carbon::now();
-                    $time = $mytime->toDateString(); 
+                  
                     $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
-                    
-                    if(!empty($drivertime)){
-                        if(empty($drivertime)){
-                            DriverTime::create([
-                                'driver_id' => $id_conducteur,
-                                'end_time' =>  $mytime,
-                            ]);
-                        }else{
-                            DriverTime::where('id', $id_conducteur)->update([
-                                'driver_id' => $id_conducteur,
-                                'end_time' =>  $mytime,
-                            ]);
-                        }
-                    }
-                    else{
+                  
+                    if(empty($drivertime)){
+                      
                         DriverTime::create([
                             'driver_id' => $id_conducteur,
-                            'end_time' =>  $mytime,   
+                            'end_time' =>   $mytime
+                        ]);
+                    }else{
+                        
+                       $driver=  DriverTime::where('driver_id', $id_conducteur)->update([
+                            'driver_id' => $id_conducteur,
+                            'end_time' =>  $mytime
                         ]);
                     }
+                    
+                    
+                    
                 }
-             
+              
                 $driver = Driver::where('id',$id_conducteur)->first();
                
                 if (!empty($driver)) {
