@@ -248,12 +248,17 @@ class DocumentsController extends Controller
 
             foreach ($admin_documents as $key=>$document) {
 
-				$get_driver_document = DB::table('driver_document')->where('document_id', $document->id)->where('driver_id', $driver_id)->whereDate('document_expiry', '>', Carbon::now())->first();
+				$get_driver_document = DB::table('driver_document')->where('document_id', $document->id)->where('driver_id', $driver_id)->first();
 
 				if($get_driver_document){
-					$document->document_path = url('assets/images/driver/documents/'.$get_driver_document->document_path);
-					$document->document_status = $get_driver_document->document_status;
-					$document->comment = $get_driver_document->comment;
+                    if ($get_driver_document->document_expiry->startOfDay() >= Carbon::now()->startOfDay()) {
+                        $get_driver_document->document_status = 'Disapprove';
+                        $get_driver_document->save();
+                       
+                    }
+                    $document->document_path = url('assets/images/driver/documents/'.$get_driver_document->document_path);
+                    $document->document_status = $get_driver_document->document_status;
+                    $document->comment = $get_driver_document->comment;
 				}else{
 					$document->document_path = '';
 					$document->document_status = 'Pending';
