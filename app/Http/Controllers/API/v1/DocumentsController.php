@@ -251,7 +251,7 @@ class DocumentsController extends Controller
 				$get_driver_document = DB::table('driver_document')->where('document_id', $document->id)->where('driver_id', $driver_id)->first();
 
 				if($get_driver_document){
-                    if ($get_driver_document->document_expiry->startOfDay() >= Carbon::now()->startOfDay()) {
+                    if ($get_driver_document->document_expiry >= Carbon::now()->toDateString()) {
                         $get_driver_document->document_status = 'Disapprove';
                         $get_driver_document->save();
                        
