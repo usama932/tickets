@@ -260,7 +260,7 @@ class RequeteBookController extends Controller
                            $row->niveau = $row_note->niveau;
                        else
                            $row->niveau = "";
-                       $row->moyenne_driver = $moyenne;
+                       $row->moyenne_driver = '';
 
                    }
                     $sql_phone = DB::table('tj_conducteur')
