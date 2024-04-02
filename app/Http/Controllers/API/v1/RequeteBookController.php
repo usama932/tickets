@@ -248,21 +248,21 @@ class RequeteBookController extends Controller
                         }
                     }
 
-                    // Note conducteur
-//                    $sql_note = DB::table('tj_note')
-//                        ->select('niveau')
-//                        ->where('id_user_app','=',DB::raw($id_user_app))
-//                        ->where('id_conducteur','=',DB::raw($id_driver))
-//                        ->get();
-//                    foreach($sql_note as $row_note)
-//                    {
-//                        if(!empty($sql_note))
-//                            $row->niveau = $row_note->niveau;
-//                        else
-//                            $row->niveau = "";
-//                        $row->moyenne_driver = $moyenne;
-//
-//                    }
+                 //   Note conducteur
+                   $sql_note = DB::table('tj_note')
+                       ->select('niveau')
+                       ->where('id_user_app','=',DB::raw($id_user_app))
+                       ->where('id_conducteur','=',DB::raw($id_driver))
+                       ->get();
+                   foreach($sql_note as $row_note)
+                   {
+                       if(!empty($sql_note))
+                           $row->niveau = $row_note->niveau;
+                       else
+                           $row->niveau = "";
+                       $row->moyenne_driver = $moyenne;
+
+                   }
                     $sql_phone = DB::table('tj_conducteur')
                         ->select('phone')
                         ->where('id', '=', DB::raw($id_driver))
