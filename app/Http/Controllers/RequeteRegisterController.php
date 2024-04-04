@@ -51,6 +51,7 @@ class RequeteRegisterController extends Controller
         $statut_round = $request->get('statut_round');
 
         if (!empty($request->get('date_retour')))
+          
             $date_retour = $request->get('date_retour');
         else
             $date_retour = date('Y-m-d');
