@@ -256,11 +256,15 @@ class RequeteBookController extends Controller
     
                         foreach ($sql as $data) {
                             $sql_nb_avis = DB::table('tj_user_note')
-                                ->select(DB::raw("COUNT(id) as niveau_driver"), DB::raw("SUM(niveau_driver) as somme"))
-                                ->where('id_user_app', '=', DB::raw($data->id_user_app))
-                                ->get();
-                            if (!is_null($sql_nb_avis[0]->somme)) {
-                                $row->moyenne_user = $sql_nb_avis[0]->somme / $sql_nb_avis[0]->niveau_driver;
+                                            ->select(DB::raw("COUNT(id) as niveau_driver"), DB::raw("SUM(niveau_driver) as somme"))
+                                            ->where('id_user_app', '=', $data->id_user_app)
+                                            ->get();
+                            if (!$sql_nb_avis->isEmpty()) {
+                                $somme = $sql_nb_avis[0]->somme;
+                               
+                                $niveau_driver = $sql_nb_avis[0]->niveau_driver;
+                               
+                                $row->moyenne_user = ($niveau_driver != 0) ? $somme / $niveau_driver : 0;
                             } else {
                                 $row->moyenne_user = "0";
                             }
