@@ -44,8 +44,8 @@ class RequeteRegisterController extends Controller
         $number_poeple = str_replace("'", "\'", $number_poeple);
         $statut_round = $request->get('statut_round');
         $driver = Driver::where('id',$id_conducteur)->first();
-        if($driver->online == 'yes')
-        {
+        // if($driver->online == 'yes')
+        // {
             if (!empty($request->get('date_retour')))
             $date_retour = $request->get('date_retour');
             else
@@ -135,11 +135,11 @@ class RequeteRegisterController extends Controller
                 $response['success'] = 'Failed';
                 $response['error'] = 'some field required';
             }
-        }
-        else{
-            $response['success'] = 'Failed';
-            $response['error'] = 'Driver is inactive';
-        }
+        // }
+        // else{
+        //     $response['success'] = 'Failed';
+        //     $response['error'] = 'Driver is inactive';
+        // }
     
         return response()->json($response);
     }
