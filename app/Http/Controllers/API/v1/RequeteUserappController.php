@@ -62,18 +62,18 @@ class RequeteUserappController extends Controller
             $row->numberplate = $row_vehicle->numberplate;
             $row->passenger = $row_vehicle->passenger;
         }
-       if($row->trajet != ''){
-        if(!empty($row->trajet ))
-        {
-            $image_trajet =asset('images/recu_trajet_course').'/'. $row->trajet;
-        }
-        else
-        {
-            $image_trajet =asset('assets/images/placeholder_image.jpg');
+        if($row->trajet != ''){
+            if(!empty($row->trajet ))
+            {
+                $image_trajet =asset('images/recu_trajet_course').'/'. $row->trajet;
+            }
+            else
+            {
+                $image_trajet =asset('assets/images/placeholder_image.jpg');
 
+            }
+            $row->trajet = $image_trajet;
         }
-        $row->trajet = $image_trajet;
-    }
     
         if(!empty($row->photo_path ))
         {
@@ -86,19 +86,19 @@ class RequeteUserappController extends Controller
         }
         $row->photo_path = $image_user;
    
-    if($row->payment_image != ''){
-        if(!empty($row->payment_image))
-        {
-            $image =asset('assets/images/payment_method').'/'.$row->payment_image;
-        }
-        else
-        {
-            $image =asset('assets/images/placeholder_image.jpg');
+        if($row->payment_image != ''){
+            if(!empty($row->payment_image))
+            {
+                $image =asset('assets/images/payment_method').'/'.$row->payment_image;
+            }
+            else
+            {
+                $image =asset('assets/images/placeholder_image.jpg');
 
+            }
+            $row->payment_image = $image;
         }
-        $row->payment_image = $image;
-    }
-
+        $output = [];
         if($id_conducteur != 0){
             // print_r($id_conducteur);
             // exit;
