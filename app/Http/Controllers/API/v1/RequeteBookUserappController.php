@@ -212,20 +212,7 @@ class RequeteBookUserappController extends Controller
                     $nb_avis = "0";
                     $row->moyenne_driver = "0";
                 }
-                // Note conducteur
-//                $sql_note = DB::table('tj_note')
-//                    ->select('niveau')
-//                    ->where('id_user_app', '=', DB::raw($id_user_app))
-//                    ->where('id_conducteur', '=', DB::raw($id_driver))
-//                    ->get();
-//                foreach ($sql_note as $row_note) {
-//                    if (!empty($sql_note))
-//                        $row->niveau = $row_note->niveau;
-//                    else
-//                        $row->niveau = "";
-//                    $row->moyenne = $moyenne;
-//
-//                }
+                
                 foreach ($sql as $data) {
                     $sql_nb_avis = DB::table('tj_user_note')
                         ->select(DB::raw("COUNT(id) as niveau_driver"), DB::raw("SUM(niveau_driver) as somme"))
@@ -271,7 +258,7 @@ class RequeteBookUserappController extends Controller
             $response['success'] = 'success';
             $response['error'] = null;
             $response['message'] = 'successfully';
-            $response['data'] = $output;
+            $response['data'] = $output ?? '[]';
 
         } else {
             $response['success'] = 'Failed';
