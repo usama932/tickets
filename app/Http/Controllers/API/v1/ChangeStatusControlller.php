@@ -17,6 +17,7 @@ class ChangeStatusControlller extends Controller
     {
         $id_conducteur = $request->id_driver;
         $online = $request->online;
+        $mytime  = $request->my_time;
        
         if (!empty($id_conducteur) && !empty($online)) {
           
@@ -33,7 +34,7 @@ class ChangeStatusControlller extends Controller
                
                 if($online == 'yes'){
                    
-                    $mytime = Carbon::now();
+                 
                     $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
 
                     if(empty($drivertime)){
@@ -52,7 +53,7 @@ class ChangeStatusControlller extends Controller
                 }
                 else{
                     
-                    $mytime = Carbon::now();
+                    
                   
                     $drivertime = DriverTime::where('driver_id', $id_conducteur)->first();
                   
