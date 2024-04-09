@@ -103,7 +103,7 @@ class GetProfileByPhoneController extends Controller
 	                if($row['photo_path'] != ''){
 	                	if(file_exists('assets/images/users'.'/'.$row['photo_path'] ))
 	                	{
-	                    	$image_user = asset('my-assets/images/users').'/'. $row['photo_path'];
+	                    	$image_user = asset('assets/images/users').'/'. $row['photo_path'];
 	                	}
 	                	else
 	                	{
@@ -115,7 +115,7 @@ class GetProfileByPhoneController extends Controller
 	                if($row['photo_nic_path'] != ''){
 	                	if(file_exists('assets/images/users'.'/'.$row['photo_nic_path'] ))
 	                	{
-	                    	$image = asset('my-assets/images/users').'/'. $row['photo_nic_path'];
+	                    	$image = asset('assets/images/users').'/'. $row['photo_nic_path'];
 	                	}
 	                	else
 	                	{

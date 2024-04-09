@@ -23,9 +23,6 @@ class UserPreNameController extends Controller
         $date_heure = date('Y-m-d H:i:s');
 
         if($user_cat == "user_app"){
-
-
-
             $updatedata =  DB::update('update tj_user_app set prenom = ?,modifier = ? where id = ?',[$prenom,$date_heure,$id_user]);
 
             if ($updatedata > 0) {
@@ -34,7 +31,7 @@ class UserPreNameController extends Controller
                 if($row['photo_path'] != ''){
                     if(file_exists('assets/images/users'.'/'.$row['photo_path'] ))
                     {
-                        $image_user = asset('assets/images/users').'/'. $row['photo_path'];
+                        $image_user = asset('assets/images/users').'/'.$row['photo_path'];
                     }
                     else
                     {
@@ -55,8 +52,8 @@ class UserPreNameController extends Controller
                     }
                     $row['photo_nic_path'] = $image;
                 }
-                    $row['photo'] ='';
-                    $row['photo_nic'] = '';
+                $row['photo'] ='';
+                $row['photo_nic'] = '';
 
 
 
