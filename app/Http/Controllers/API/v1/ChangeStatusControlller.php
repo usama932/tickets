@@ -18,7 +18,7 @@ class ChangeStatusControlller extends Controller
         $id_conducteur = $request->id_driver;
         $online = $request->online;
         $mytime  = $request->my_time;
-       
+       dd($mytime);
         if (!empty($id_conducteur) && !empty($online)) {
           
           $admin_documents = DB::table('admin_documents')->where('is_enabled','=','Yes')->get();
