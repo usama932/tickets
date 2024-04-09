@@ -29,7 +29,7 @@ class UserPreNameController extends Controller
                 $get_user = UserApp::where('id',$id_user)->first();
                 $row = $get_user->toArray();
                 if($row['photo_path'] != ''){
-                    if(file_exists('assets/images/users'.'/'.$row['photo_path'] ))
+                    if($row['photo_path'])
                     {
                         $image_user = asset('assets/images/users').'/'.$row['photo_path'];
                     }
@@ -41,7 +41,7 @@ class UserPreNameController extends Controller
                     $row['photo_path'] = $image_user;
                 }
                     if($row['photo_nic_path'] != ''){
-                    if(file_exists('assets/images/users'.'/'.$row['photo_nic_path'] ))
+                    if($row['photo_nic_path'])
                     {
                         $image = asset('assets/images/users').'/'. $row['photo_nic_path'];
                     }
@@ -82,7 +82,7 @@ class UserPreNameController extends Controller
                     $row['photo_car_service_book'] = '';
                     $row['photo_road_worthy'] = '';
                     if($row['photo_path'] != ''){
-                        if(file_exists('assets/images/driver'.'/'.$row['photo_path'] ))
+                        if($row['photo_path'])
                         {
                             $image_user = asset('assets/images/driver').'/'. $row['photo_path'];
                         }
@@ -94,7 +94,7 @@ class UserPreNameController extends Controller
                         $row['photo_path'] = $image_user;
                     }
                      if($row['photo_nic_path'] != ''){
-                        if(file_exists('assets/images/driver'.'/'.$row['photo_nic_path'] ))
+                        if($row['photo_nic_path'])
                         {
                             $image = asset('assets/images/driver').'/'. $row['photo_nic_path'];
                         }
