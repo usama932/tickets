@@ -339,6 +339,10 @@ Route::post('v1/user-photo/', [OldUserPhotoController::class, 'UpdateUserPhoto']
 Route::post('v1/confirm-requete-book/', [ConfirmedRequeteBookController::class, 'confirmRequest']);
 Route::get('v1/driver_reached/{user_id}', [ConfirmRequeteController::class, 'reached_token']);
 Route::get('v1/driver_hours/{driver_id}', [ConfirmRequeteController::class, 'driver_hours']);
+
+Route::post('v1/active/{driver_id}', [ConfirmedRequeteBookController::class, 'active_hour']);
+
+Route::post('v1/inactive/{driver_id}', [ConfirmedRequeteBookController::class, 'inactive_hour']);
 //not found end
 
 Route::post('search_driver', [\App\Http\Controllers\API\v1\CustomerCurrentLocationController::class, 'updateLocation']);
