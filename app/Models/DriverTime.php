@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DriverTime extends Model
 {
     use HasFactory;
-    protected $guarded = [];
     protected $table = 'driver_times';
+    protected $guarded = [];
 }

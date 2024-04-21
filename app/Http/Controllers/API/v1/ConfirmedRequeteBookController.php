@@ -83,10 +83,12 @@ class ConfirmedRequeteBookController extends Controller
             }
             elseif($time_difference_in_hours >= 10 && $time_difference_in_hours + 14 >=  24)
             {
-                DriverTime::where('driver_id',$driver)->update([
+            
+                $updated = DriverTime::where('driver_id',$driver_id)->update([
                     'driver_id' => $driver_id,
-                    'start_time' => $request->start_time,
+                    'start_time' => Carbon::parse($request->start_time),
                 ]);
+                
                 $response['success']= 'success';
                 $response['error']= false;
                 $response['message']= 'Active  Successfully and start time create';       
