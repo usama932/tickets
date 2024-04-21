@@ -117,7 +117,7 @@ class ConfirmedRequeteBookController extends Controller
         if(!empty($driver)){
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
-                'end_time' => $request->end_time,
+                'end_time' => Carbon::parse($request->end_time),
             ]);
             $response['success']= 'success';
             $response['error']= false;
