@@ -74,9 +74,7 @@ class ConfirmedRequeteBookController extends Controller
         if(!empty($driver)){
             $start_time = Carbon::parse($driver->start_time);
             $end_time = Carbon::parse($driver->end_time);
-            $time_difference = $start_time->diff($end_time);
-            $time_difference_in_hours = $time_difference->h + ($time_difference->days * 24);
-         
+            $time_difference_in_hours = $end_time->diffInHours($start_time);
             $currentDateTime = Carbon::now();
             $update_time =  Carbon::parse($driver->updated_at);
             $hoursDifference = $update_time->diffInHours($currentDateTime);
@@ -133,8 +131,9 @@ class ConfirmedRequeteBookController extends Controller
         if(!empty($driver)){
             $start_time = Carbon::parse($driver->start_time);
             $end_time = Carbon::parse($driver->end_time);
-            $time_difference = $start_time->diff($end_time);
-            $time_difference_in_hours = $time_difference->h + ($time_difference->days * 24);
+          
+            $time_difference_in_hours = $end_time->diffInHours($start_time);
+            
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => Carbon::parse($request->end_time),
