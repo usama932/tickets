@@ -115,7 +115,7 @@ class ConfirmedRequeteBookController extends Controller
     {
         $driver = DriverTime::where('driver_id',$driver_id)->first();
         if(!empty($driver)){
-            DriverTime::where('driver_id',$driver)->update([
+            DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => $request->end_time,
             ]);
