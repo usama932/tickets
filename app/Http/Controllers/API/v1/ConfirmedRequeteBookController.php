@@ -79,40 +79,44 @@ class ConfirmedRequeteBookController extends Controller
             $update_time =  Carbon::parse($driver->updated_at);
             $hoursDifference = $update_time->diffInHours($currentDateTime);
             
-            if ($hoursDifference <= 14) {
-                if($time_difference_in_hours < 10){
-                    $response['success']= 'success';
-                    $response['error']= false;
-                    $response['message']= 'Active  Successfully';       
-                }
-                elseif($time_difference_in_hours >= 10 && $time_difference_in_hours + 14 >=  24)
-                {
+            // if ($hoursDifference <= 14) {
+            //     if($time_difference_in_hours < 10){
+            //         $response['success']= 'success';
+            //         $response['error']= false;
+            //         $response['message']= 'Active  Successfully';       
+            //     }
+            //     elseif($time_difference_in_hours >= 10 && $time_difference_in_hours + 14 >=  24)
+            //     {
                 
-                    $updated = DriverTime::where('driver_id',$driver_id)->update([
-                        'driver_id' => $driver_id,
-                        'start_time' => Carbon::parse($request->start_time),
-                    ]);
+            //         $updated = DriverTime::where('driver_id',$driver_id)->update([
+            //             'driver_id' => $driver_id,
+            //             'start_time' => Carbon::parse($request->start_time),
+            //         ]);
                     
-                    $response['success']= 'success';
-                    $response['error']= false;
-                    $response['message']= 'Active  Successfully and start time create';       
-                }
-                else{
-                    $response['success']= 'success';
-                    $response['error']= true;
-                    $response['message']= 'Active  Unsuccessfully';    
-                }
-            }
-            else{
-                $updated = DriverTime::where('driver_id',$driver_id)->update([
-                    'driver_id' => $driver_id,
-                    'start_time' => Carbon::parse($request->start_time),
-                ]);
+            //         $response['success']= 'success';
+            //         $response['error']= false;
+            //         $response['message']= 'Active  Successfully and start time create';       
+            //     }
+            //     else{
+            //         $response['success']= 'success';
+            //         $response['error']= true;
+            //         $response['message']= 'Active  Unsuccessfully';    
+            //     }
+            // }
+            // else{
+            //     $updated = DriverTime::where('driver_id',$driver_id)->update([
+            //         'driver_id' => $driver_id,
+            //         'start_time' => Carbon::parse($request->start_time),
+            //     ]);
                 
-                $response['success']= 'success';
-                $response['error']= false;
-                $response['message']= 'Active  Successfully and start time udpated';       
-            }
+            //     $response['success']= 'success';
+            //     $response['error']= false;
+            //     $response['message']= 'Active  Successfully and start time udpated';       
+            // }
+            $updated = DriverTime::where('driver_id',$driver_id)->update([
+                'driver_id' => $driver_id,
+                'start_time' => Carbon::parse($request->start_time),
+            ]);
         }
         else{
             DriverTime::create([
@@ -132,13 +136,13 @@ class ConfirmedRequeteBookController extends Controller
         if(!empty($driver)){
             $start_time = Carbon::parse($driver->start_time);
             $end_time = Carbon::parse($request->end_time);
-          
+           
             $time_difference_in_hours = $end_time->diffInHours($start_time);
             // dd($time_difference_in_hours);
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => Carbon::parse($request->end_time),
-                'hours' => $time_difference_in_hours
+                'hours' => $driver + $time_difference_in_hours
             ]);
             $response['success']= 'success';
             $response['error']= false;

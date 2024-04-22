@@ -20,12 +20,21 @@ use DB;
 class ConfirmRequeteController extends Controller
 {
 
-    public function driver_hours($driver_id){
+    public function driver_hours(Request $request , $driver_id){
         $mytime = Carbon::now();
         $time = $mytime->toDateTimeString();
-        $time = Carbon::parse($time);
+        $time = $request->time;
+        dd($request->all());
         $drivertime = DriverTime::where('driver_id',$driver_id)->first();
+        
+        $time_difference_in_hours = $time->diffInHours($drivertime->end_time);
         if(!empty($drivertime)){
+            if($time_difference_in_hours >=10){
+                DriverTime::where('driver_id',$driver_id)->update([
+                    'hours' => 0,
+                    'end_time' => '0000-00-00 00:00:00',
+                ]);
+            }
             $response['success'] = 'success';
             $response['error'] = null;
             $response['message'] = 'driver get successfully ';
@@ -38,6 +47,8 @@ class ConfirmRequeteController extends Controller
             $response['drivertime'] = '';
             return $response;
         }
+        
+       
       
     }
     public function reached_token($user_id){
