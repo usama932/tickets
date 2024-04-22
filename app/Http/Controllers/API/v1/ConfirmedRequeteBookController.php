@@ -78,6 +78,7 @@ class ConfirmedRequeteBookController extends Controller
             $currentDateTime = Carbon::now();
             $update_time =  Carbon::parse($driver->updated_at);
             $hoursDifference = $update_time->diffInHours($currentDateTime);
+            
             if ($hoursDifference <= 14) {
                 if($time_difference_in_hours < 10){
                     $response['success']= 'success';
@@ -133,7 +134,7 @@ class ConfirmedRequeteBookController extends Controller
             $end_time = Carbon::parse($driver->end_time);
           
             $time_difference_in_hours = $end_time->diffInHours($start_time);
-            
+            // dd($time_difference_in_hours);
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => Carbon::parse($request->end_time),
