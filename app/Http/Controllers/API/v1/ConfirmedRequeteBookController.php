@@ -142,7 +142,7 @@ class ConfirmedRequeteBookController extends Controller
            
             $time_difference = $end_time->diff($start_time);
             $time_difference_in_hours = $time_difference->h; 
-            $time_difference_in_minutes = $time_difference_in_hours.':'.$time_difference->i; 
+            $time_difference_in_minutes = $time_difference_in_hours.':'.$time_difference->i. ':' . $time_difference->s; 
            
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
