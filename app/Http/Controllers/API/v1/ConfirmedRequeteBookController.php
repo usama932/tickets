@@ -117,6 +117,9 @@ class ConfirmedRequeteBookController extends Controller
                 'driver_id' => $driver_id,
                 'start_time' => Carbon::parse($request->start_time),
             ]);
+            $response['success']= 'success';
+            $response['error']= false;
+            $response['message']= 'Active  Successfully and start time create';       
         }
         else{
             DriverTime::create([
@@ -142,7 +145,7 @@ class ConfirmedRequeteBookController extends Controller
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => Carbon::parse($request->end_time),
-                'hours' => $driver + $time_difference_in_hours
+                'hours' => $driver->hours + $time_difference_in_hours
             ]);
             $response['success']= 'success';
             $response['error']= false;

@@ -22,13 +22,13 @@ class ConfirmRequeteController extends Controller
 
     public function driver_hours(Request $request , $driver_id){
         $mytime = Carbon::now();
-        $time = $mytime->toDateTimeString();
         $time = $request->time;
-        dd($request->all());
-        $drivertime = DriverTime::where('driver_id',$driver_id)->first();
-        
-        $time_difference_in_hours = $time->diffInHours($drivertime->end_time);
+        $update_time =  Carbon::parse($request->time);           
+        $drivertime = DriverTime::where('driver_id',$update_time)->first();
+       
         if(!empty($drivertime)){
+            $end_time =  Carbon::parse($drivertime->end_time);
+            $time_difference_in_hours = $time->diffInHours($end_time);
             if($time_difference_in_hours >=10){
                 DriverTime::where('driver_id',$driver_id)->update([
                     'hours' => 0,
