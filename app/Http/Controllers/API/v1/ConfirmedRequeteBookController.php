@@ -140,12 +140,14 @@ class ConfirmedRequeteBookController extends Controller
             $start_time = Carbon::parse($driver->start_time);
             $end_time = Carbon::parse($request->end_time);
            
-            $time_difference_in_hours = $end_time->diffInHours($start_time);
-            // dd($time_difference_in_hours);
+            $time_difference = $end_time->diff($start_time);
+            $time_difference_in_hours = $time_difference->h; 
+            $time_difference_in_minutes = $time_difference_in_hours.':'.$time_difference->i; 
+           
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => Carbon::parse($request->end_time),
-                'hours' => $driver->hours + $time_difference_in_hours
+                'hours' => $driver->hours + $time_difference_in_minutes
             ]);
             $response['success']= 'success';
             $response['error']= false;
