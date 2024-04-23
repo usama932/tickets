@@ -137,9 +137,6 @@ class ConfirmedRequeteBookController extends Controller
     {
         $driver = DriverTime::where('driver_id',$driver_id)->first();
         if(!empty($driver)){
-            $start_time = Carbon::parse($driver->start_time);
-            $end_time = Carbon::parse($request->end_time);
-           
             $time_difference = $end_time->diff($start_time);
             $time_difference_formatted = sprintf(
                 "%02d:%02d:%02d",
@@ -147,10 +144,19 @@ class ConfirmedRequeteBookController extends Controller
                 $time_difference->i,
                 $time_difference->s
             );
+            
+            // Convert the time difference to total seconds
+            $total_seconds_difference = $time_difference->h * 3600 + $time_difference->i * 60 + $time_difference->s;
+            
+            // Update the driver's total hours
+            $new_total_hours = $driver->hours + $total_seconds_difference;
+            
+            // Convert total hours back to the format "00:00:00"
+            $new_total_hours_formatted = gmdate("H:i:s", $new_total_hours);
             DriverTime::where('driver_id',$driver_id)->update([
                 'driver_id' => $driver_id,
                 'end_time' => Carbon::parse($request->end_time),
-                'hours' => $driver->hours + $time_difference_formatted
+                'hours' => $new_total_hours_formatted
             ]);
             $response['success']= 'success';
             $response['error']= false;
