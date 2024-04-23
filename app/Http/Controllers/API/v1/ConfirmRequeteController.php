@@ -28,13 +28,16 @@ class ConfirmRequeteController extends Controller
      
         if(!empty($drivertime)){
             $end_time =  Carbon::parse($drivertime->end_time);
+            if($end_time) {
             $time_difference_in_hours = $time->diffInHours($end_time);
-            if($time_difference_in_hours >=10){
-                DriverTime::where('driver_id',$driver_id)->update([
-                    'hours' => 0,
-                    'end_time' => '0000-00-00 00:00:00',
-                ]);
+                if($time_difference_in_hours >=10){
+                    DriverTime::where('driver_id',$driver_id)->update([
+                        'hours' => 0,
+                        'end_time' => '0000-00-00 00:00:00',
+                    ]);
+                }
             }
+          
             $response['success'] = 'success';
             $response['error'] = null;
             $response['message'] = 'driver get successfully ';
