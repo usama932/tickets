@@ -140,29 +140,23 @@ class ConfirmedRequeteBookController extends Controller
             $start_time = Carbon::parse($driver->start_time);
             $end_time = Carbon::parse($request->end_time);
             $time_difference = $end_time->diff($start_time);
-            $time_difference_formatted = sprintf(
-                "%02d:%02d:%02d",
-                $time_difference->h,
-                $time_difference->i,
-                $time_difference->s
-            );
             
-            // Convert the time difference to total seconds
             $total_seconds_difference = $time_difference->h * 3600 + $time_difference->i * 60 + $time_difference->s;
             
-            // Update the driver's total hours
-            $new_total_hours = $driver->hours + $total_seconds_difference;
+            $datetime1 = Carbon::createFromFormat('H:i:s', $driver->hours);
             
-            // Convert total hours back to the format "00:00:00"
-            $new_total_hours_formatted = gmdate("H:i:s", $new_total_hours);
-            DriverTime::where('driver_id',$driver_id)->update([
+            // Add the total seconds difference to datetime1
+            $new_total_hours = $datetime1->copy()->addSeconds($total_seconds_difference);
+            
+            DriverTime::where('driver_id', $driver_id)->update([
                 'driver_id' => $driver_id,
-                'end_time' => Carbon::parse($request->end_time),
-                'hours' =>$new_total_hours_formatted
+                'end_time' => $end_time,
+                'hours' => $new_total_hours->format('H:i:s') // Format the hours
             ]);
-            $response['success']= 'success';
-            $response['error']= false;
-            $response['message']= 'Active  Successfully and End time create';    
+            
+            $response['success'] = 'success';
+            $response['error'] = false;
+            $response['message'] = 'Active Successfully and End time create';    
         }else{
             $response['success']= 'success';
             $response['error']= true;
