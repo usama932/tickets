@@ -63,7 +63,7 @@ class DriverController extends Controller
             ->where('cpv_requirement.updated_at', '>', Carbon::now()->subMonths(6))
             ->where('remaining_tokens.tokens', '>', 0)
             ->get();
-    
+        dd($sql);
         $allDistance = array();
     
         if ($sql->count() > 0) {
