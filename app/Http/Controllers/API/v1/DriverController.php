@@ -54,14 +54,14 @@ class DriverController extends Controller
             ->where('delivery_charges.id_vehicle_type', '=', DB::raw('tj_vehicule.id_type_vehicule'))
             ->where('tj_vehicule.id_conducteur', '=', DB::raw('tj_conducteur.id'))
             ->where('tj_vehicule.statut', '=', 'yes')
-            ->where('tj_conducteur.statut', '=', 'yes')
+            //->where('tj_conducteur.statut', '=', 'yes')
             ->where('tj_conducteur.is_verified', '=', '1')
-            ->where('tj_conducteur.online', '!=', 'no')
+            //->where('tj_conducteur.online', '!=', 'no')
             ->where('tj_type_vehicule.status', '=', 'yes')
             ->where('tj_conducteur.latitude', '!=', '')
             ->where('tj_conducteur.longitude', '!=', '')
             //->where('cpv_requirement.updated_at', '>', Carbon::now()->subMonths(6))
-            ->where('remaining_tokens.tokens', '>', 0)
+           // ->where('remaining_tokens.tokens', '>', 0)
             ->get();
      
         $allDistance = array();
