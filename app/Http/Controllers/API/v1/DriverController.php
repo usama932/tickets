@@ -50,18 +50,18 @@ class DriverController extends Controller
                 'tj_conducteur.online', 'tj_conducteur.photo_path as photo', 'tj_conducteur.latitude', 'tj_conducteur.longitude','delivery_charges.flag_day_rate','delivery_charges.overnight_charges_per_km','delivery_charges.flag_overnight_rate','delivery_charges.peak_charges_km','delivery_charges.flag_peak_rate',
                 'tj_vehicule.id as idVehicule', 'tj_vehicule.brand_name', 'tj_vehicule.model_name','tj_vehicule.car_category', 'tj_vehicule.color', 'tj_vehicule.numberplate','delivery_charges.day_charges_per_km','delivery_charges.lifting_fee','delivery_charges.high_occupency',
                 'tj_vehicule.passenger', 'cpv_requirement.updated_at','tj_type_vehicule.libelle as typeVehicule')
-            ->where('tj_vehicule.id_type_vehicule', '=', DB::raw('tj_type_vehicule.id'))
-            ->where('delivery_charges.id_vehicle_type', '=', DB::raw('tj_vehicule.id_type_vehicule'))
-            ->where('tj_vehicule.id_conducteur', '=', DB::raw('tj_conducteur.id'))
-            ->where('tj_vehicule.statut', '=', 'yes')
-            //->where('tj_conducteur.statut', '=', 'yes')
-            ->where('tj_conducteur.is_verified', '=', '1')
-            //->where('tj_conducteur.online', '!=', 'no')
-            ->where('tj_type_vehicule.status', '=', 'yes')
-            ->where('tj_conducteur.latitude', '!=', '')
-            ->where('tj_conducteur.longitude', '!=', '')
-            //->where('cpv_requirement.updated_at', '>', Carbon::now()->subMonths(6))
-           // ->where('remaining_tokens.tokens', '>', 0)
+        //     ->where('tj_vehicule.id_type_vehicule', '=', DB::raw('tj_type_vehicule.id'))
+        //     ->where('delivery_charges.id_vehicle_type', '=', DB::raw('tj_vehicule.id_type_vehicule'))
+        //     ->where('tj_vehicule.id_conducteur', '=', DB::raw('tj_conducteur.id'))
+        //     ->where('tj_vehicule.statut', '=', 'yes')
+        //     //->where('tj_conducteur.statut', '=', 'yes')
+        //     ->where('tj_conducteur.is_verified', '=', '1')
+        //     //->where('tj_conducteur.online', '!=', 'no')
+        //     ->where('tj_type_vehicule.status', '=', 'yes')
+        //     ->where('tj_conducteur.latitude', '!=', '')
+        //     ->where('tj_conducteur.longitude', '!=', '')
+        //     //->where('cpv_requirement.updated_at', '>', Carbon::now()->subMonths(6))
+        //    // ->where('remaining_tokens.tokens', '>', 0)
             ->get();
      
         $allDistance = array();
