@@ -60,7 +60,7 @@ class DriverController extends Controller
             ->where('tj_type_vehicule.status', '=', 'yes')
             ->where('tj_conducteur.latitude', '!=', '')
             ->where('tj_conducteur.longitude', '!=', '')
-            ->where('cpv_requirement.updated_at', '>', Carbon::now()->subMonths(6))
+            //->where('cpv_requirement.updated_at', '>', Carbon::now()->subMonths(6))
             ->where('remaining_tokens.tokens', '>', 0)
             ->get();
      
