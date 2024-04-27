@@ -65,7 +65,7 @@ class DriverController extends Controller
             ->get();
      
         $allDistance = array();
-    
+    dd($allDistance);
         if ($sql->count() > 0) {
             $output = array();
             foreach ($sql as $row) {
